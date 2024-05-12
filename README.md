@@ -2,7 +2,7 @@
 2024학년도 1학기 전북대학교 **OSS 팀 프로젝트**
 <br><br>
 
-## 프로젝트 계획서
+## <img src="https://github.com/jeongwoo1998/OSS_TeamProject/assets/56586533/4dc5a449-4e10-4742-94a2-e2bda32429d1" width="25" height="25"/> 프로젝트 계획서
 
 ### 프로젝트 명
 🧑🏼‍🍳 **`영칼로리`** = `영양소 + 칼로리`
