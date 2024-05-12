@@ -61,7 +61,7 @@
     - 세부 메뉴 (음식 정보 저장 및 분석 / 식당 추천 / 목표 영양소, 칼로리 설정 / 캘린더) 화면 구성 (Front-end)<br><br>
 
 ### 서비스 구성도
-<img src="https://github.com/jeongwoo1998/OSS_TeamProject/assets/56586533/bf4159b1-a9a4-4b7c-8fb3-396678e7a296" width="900" height="700"/>
+<img src="https://github.com/jeongwoo1998/OSS_TeamProject/assets/56586533/bf4159b1-a9a4-4b7c-8fb3-396678e7a296" width="800" height="600"/>
 <br><br>
 
 ### 기대 효과
