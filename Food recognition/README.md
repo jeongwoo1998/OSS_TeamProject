@@ -2,8 +2,8 @@
 
 ### 🔗 Google Drive에서 음식 분류 및 양 추정 모델 다운로드
 1. Google Drive 다운로드 링크로 이동합니다.  
-   - [yolov3](https://drive.google.com/file/d/1wEj8I_bFyrZknsEtgfLWGwTZALZwKGhI/view?usp=drive_link)
-   - [quantity_est](https://drive.google.com/file/d/1gZ-WktxdDgDsXXhrIndBWyinxJ8_abO1/view?usp=drive_link) <br><br>
+   - [yolov3](https://drive.google.com/file/d/18eb8QoilKAzBjNbh-htmOoXHmCiRoE0o/view?usp=drive_link)
+   - [quantity_est](https://drive.google.com/file/d/1QKwV2J-6kdMC6_h0L9kkJ0ueRWYmVMCi/view?usp=drive_link) <br><br>
 2. 다음 파일들을 다운로드합니다.
    - **`yolov3.zip`**
    - **`quantity_est.zip`** <br><br>
