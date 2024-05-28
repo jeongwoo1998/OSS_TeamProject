@@ -6,6 +6,7 @@ import HomeScreen from './screens/HomeScreen';
 import NutritionStatsScreen from './screens/NutritionStatsScreen';
 import GoalSettingScreen from './screens/GoalSettingScreen';
 import NutritionInfoScreen from './screens/NutritionInfoScreen';
+import RestaurantRecommendationScreen from './screens/RestaurantRecommendationScreen';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ const screens = [
   { name: 'NutritionStats', component: NutritionStatsScreen }, // 영양 통계 화면
   { name: 'GoalSetting', component: GoalSettingScreen }, // 목표 섭취량 설정 화면
   { name: 'NutritionInfo', component: NutritionInfoScreen }, // 영양 정보 화면
+  { name: 'RestaurantRecommendation', component: RestaurantRecommendationScreen }, // 식당 추천 화면
 ];
 
 const App = () => (
