@@ -1,0 +1,14 @@
+Flask==2.1.0
+Flask-SQLAlchemy==2.5.1
+pymysql==1.0.2
+Flask-Migrate==3.1.0
+Werkzeug==2.3.6
+SQLAlchemy==1.4.46
+torch
+torchvision
+torchaudio
+pandas
+opencv-python
+matplotlib
+tqdm
+openpyxl
