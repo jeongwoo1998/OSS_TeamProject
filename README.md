@@ -14,6 +14,6 @@
 3. Firebase에서 json을 가져와 authenticaiotn디렉토리에
     "firebase_auth.json"을 생성
 
-4. https://console.cloud.google.com/dptj Outh클라이언트ID를 발급받고 ID와 시크릿 키를 Firebase_auth에 입력
+4. https://console.cloud.google.com/ 에서 Outh클라이언트ID를 발급받고 ID와 시크릿 키를 Firebase_auth에 입력
 
 5. app.py 실행(아직 실행되지 않음)
