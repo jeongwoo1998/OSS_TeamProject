@@ -12,7 +12,7 @@
 해당 작업으로 venv라는 가상환경을 생성
 
 3. Firebase에서 json을 가져와 authenticaiotn디렉토리에
-    "firebase_auth.json"을 생성
+    "firebase_auth_fake.json"에서 fake를 지우고 "firebase_auth.json"생성
 
 4. https://console.cloud.google.com/ 에서 Outh클라이언트ID를 발급받고 ID와 시크릿 키를 Firebase_auth에 입력
 
