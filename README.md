@@ -13,7 +13,7 @@
 <br>
 3. Firebase에서 json을 가져와 authenticaiotn/firebase_auth.json에
 <br>
-```
+'''
     {
   "web": {
     "client_id": "YOUR_GOOGLE_CLIENT_ID",
@@ -38,7 +38,7 @@
   "appId": "YOUR_APP_ID",
   "measurementId": "YOUR_MEASUREMENT_ID"
 }
-```
+'''
 <br>
 4. https://console.cloud.google.com/ 에서 Outh클라이언트ID를 발급받고 ID와 시크릿 키를 Firebase_auth에 입력
 <br>
