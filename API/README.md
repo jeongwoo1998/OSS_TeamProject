@@ -14,7 +14,10 @@
 
 ### 🪄 파일 정리
 1. 압축 해제한 파일들을 **`Food recognition`** 폴더에 위치시킵니다. <br><br>
-2. **`pip install -r requirements.txt`**
+2. **`pip install -r requirements.txt`** <br><br>
 
 ### 🚀 실행
-1. **`app.py`** 파일을 실행시킵니다.
+1. **`app.py`** 파일을 실행시킵니다. <br><br>
+
+### 🌈 Swagger API
+**`localhost:5000/swagger`**
