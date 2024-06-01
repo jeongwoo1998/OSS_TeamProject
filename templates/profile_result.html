@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Result</title>
+</head>
+<body>
+    <h1>Profile Result</h1>
+    <p>Height: {{ user_info.user_height }}</p>
+    <p>Weight: {{ user_info.user_weight }}</p>
+    <p>Sex: {{ user_info.user_sex }}</p>
+    <p>Age: {{ user_info.user_age }}</p>
+    <p>Activity Level: {{ user_info.activity_level }}</p>
+    <p>Recommended Calories: {{ intake_goal.calories }}</p>
+    <p>Recommended Carbs: {{ intake_goal.carbs }}g</p>
+    <p>Recommended Protein: {{ intake_goal.protein }}g</p>
+    <p>Recommended Fat: {{ intake_goal.fat }}g</p>
+    <a href="{{ url_for('main.logout') }}">Logout</a>
+    <button onclick="showToken()">Show Token and Payload</button>
+    <div id="token" style="display:none;">
+        <h3>JWT Token</h3>
+        <p>{{ token | default('N/A') }}</p>
+        <h3>Payload</h3>
+        <pre>{{ payload | tojson | default('{}') }}</pre>
+    </div>
+    <script>
+        function showToken() {
+            var tokenDiv = document.getElementById('token');
+            if (tokenDiv.style.display === 'none') {
+                tokenDiv.style.display = 'block';
+            } else {
+                tokenDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
