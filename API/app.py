@@ -2,6 +2,7 @@ import os
 import sys
 from flask import Flask, jsonify
 from flask_cors import CORS
+from flask_swagger_ui import get_swaggerui_blueprint    
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'Firebase'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'Food recognition'))
@@ -15,6 +16,18 @@ CORS(app)
 # Register blueprint
 app.register_blueprint(firebase_BP)
 app.register_blueprint(foodRecognition_BP)
+
+# Swagger UI setup
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.yaml'
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "영칼로리 API"
+    }
+)
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 @app.route('/test', methods=['GET'])
 def test_route():
