@@ -1,13 +1,15 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
-from datetime import datetime
+from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
+from datetime import datetime, timedelta
 import json
 import pyrebase
 from google.auth.transport.requests import Request
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
+from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
 import requests
 import google.auth.transport.requests
 import os
+import jwt
 
 # Blueprint 설정
 bp = Blueprint('main', __name__)
@@ -28,6 +30,11 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
     redirect_uri="http://localhost:5000/login/callback"
 )
+
+# JWT 비밀 키 설정
+JWT_SECRET = 'oss_is_hard'
+JWT_ALGORITHM = 'HS256'
+JWT_EXP_DELTA_SECONDS = 3600  # A hour
 
 @bp.route('/')
 def index():
@@ -59,17 +66,33 @@ def callback():
     session['google_id'] = id_info.get("sub")
     session['name'] = id_info.get("name")
     session['email'] = id_info.get("email")
-    return redirect(url_for('main.profile'))
+
+    # JWT 생성
+    payload = {
+        'sub': session['google_id'],
+        'name': session['name'],
+        'email': session['email'],
+        'exp': datetime.utcnow() + timedelta(seconds=JWT_EXP_DELTA_SECONDS)
+    }
+    jwt_token = jwt.encode(payload, JWT_SECRET, JWT_ALGORITHM)
+
+    return jsonify({'token': jwt_token})
 
 @bp.route('/profile')
 def profile():
-    if 'google_id' not in session:
+    token = request.args.get('token')
+    if not token:
         return redirect(url_for('main.index'))
-
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+    except jwt.ExpiredSignatureError:
+        return jsonify({'message': 'Token has expired'}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({'message': 'Invalid token'}), 401
     user_info = {
-        'name': session['name'],
-        'email': session['email']
-    }
+            'name': payload['name'],
+            'email': payload['email']
+        }
     return render_template('profile.html', user_info=user_info)
 
 @bp.route('/logout')
