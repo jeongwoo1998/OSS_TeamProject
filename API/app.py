@@ -1,54 +1,21 @@
-from flask import Flask, request, jsonify, Response
 import os
-import json
 import sys
+from flask import Flask, jsonify
 from flask_cors import CORS
 
-sys.path.append(os.path.abspath('Food recognition'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'Firebase'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'Food recognition'))
 
-# Import the food quantity and recognition models
-from quantity_est.food_quantity_model import quantity
-from yolov3.food_recognition_model import detect, get_nutrients
+from firebase import firebase_BP
+from foodRecognition import foodRecognition_BP
 
-# Initialize the Flask app
 app = Flask(__name__)
 CORS(app)
 
-# /quantity
-@app.route('/quantity', methods=['POST'])
-def quantity_route():
-    data = request.json
-    image_path = data.get('image_path')
-    if not image_path:
-        return jsonify({"error": "image_path is required"}), 400
+# Register blueprint
+app.register_blueprint(firebase_BP)
+app.register_blueprint(foodRecognition_BP)
 
-    if not os.path.isfile(image_path):
-        return jsonify({"error": "image_path is invalid or does not exist"}), 400
-
-    try:
-        quantity_value = quantity(image_path)  # Call the quantity function to analyze the food quantity
-        response = {"quantity": quantity_value}
-        return jsonify(response)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-# /detect
-@app.route('/detect', methods=['POST'])
-def detect_route():
-    data = request.json
-    image_path = data.get('image_path')
-    if not image_path:
-        return jsonify({"error": "image_path is required"}), 400
-
-    try:
-        results = detect(image_path)  # Call the detect function to recognize food in the image
-        nutrients = get_nutrients(results)  # Call get_nutrients to get the nutritional information of recognized food
-        response = Response(json.dumps(nutrients, ensure_ascii=False), content_type='application/json; charset=utf-8')
-        return response
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-# /test
 @app.route('/test', methods=['GET'])
 def test_route():
     try:
