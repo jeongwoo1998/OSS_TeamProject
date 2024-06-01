@@ -1,0 +1,931 @@
+openapi: 3.0.0
+info:
+  title: 영칼로리 API
+  description: |-
+    **OSS Team Project**
+    
+    **장정우**
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Local server
+paths:
+  /UploadImage:
+    post:
+      summary: 이미지 업로드
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                Image:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image_url:
+                    type: string
+                    example: "https://storage.googleapis.com/your-bucket-name/image.jpg"
+        400:
+          description: Missing image file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Missing image file"
+  /SetUserID:
+    post:
+      summary: 사용자 아이디 저장
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: user_id_1
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        400:
+          description: Missing data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing user_id
+
+  /SetUserInfo:
+    post:
+      summary: 사용자 정보 저장
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: user_id_1
+                user_info:
+                  type: object
+                  properties:
+                    user_sex:
+                      type: string
+                      example: male
+                    user_height:
+                      type: number
+                      example: 180
+                    user_weight:
+                      type: number
+                      example: 75
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        400:
+          description: Missing data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing data
+
+  /SetIntakeGoal:
+    post:
+      summary: 사용자 목표 섭취량 저장
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: user_id_1
+                intake_goal:
+                  type: object
+                  properties:
+                    calories:
+                      type: number
+                      example: 2000
+                    carb:
+                      type: number
+                      example: 250
+                    protein:
+                      type: number
+                      example: 150
+                    fat:
+                      type: number
+                      example: 70
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        400:
+          description: Missing data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing data
+
+  /SetDate:
+    post:
+      summary: 사용자 날짜 저장
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: user_id_1
+                date:
+                  type: string
+                  example: 2024-05-26
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        400:
+          description: Missing data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing data
+
+  /SetBreakfastData:
+    post:
+      summary: 사용자 아침 식사 저장
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: user_id_1
+                date:
+                  type: string
+                  example: 2024-05-26
+                breakfast_data:
+                  type: object
+                  properties:
+                    pic:
+                      type: string
+                      example: ./image.jpg
+                    food:
+                      type: string
+                      example: oatmeal
+                    calories:
+                      type: number
+                      example: 300
+                    carb:
+                      type: number
+                      example: 50
+                    protein:
+                      type: number
+                      example: 10
+                    fat:
+                      type: number
+                      example: 5
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        400:
+          description: Missing data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing data
+
+  /SetLunchData:
+    post:
+      summary: 사용자 점심 식사 저장
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: user_id_1
+                date:
+                  type: string
+                  example: 2024-05-26
+                lunch_data:
+                  type: object
+                  properties:
+                    pic:
+                      type: string
+                      example: ./image.jpg
+                    food:
+                      type: string
+                      example: chicken salad
+                    calories:
+                      type: number
+                      example: 500
+                    carb:
+                      type: number
+                      example: 30
+                    protein:
+                      type: number
+                      example: 40
+                    fat:
+                      type: number
+                      example: 20
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        400:
+          description: Missing data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing data
+
+  /SetDinnerData:
+    post:
+      summary: 사용자 저녁 식사 저장
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: user_id_1
+                date:
+                  type: string
+                  example: 2024-05-26
+                dinner_data:
+                  type: object
+                  properties:
+                    pic:
+                      type: string
+                      example: ./image.jpg
+                    food:
+                      type: string
+                      example: grilled fish
+                    calories:
+                      type: number
+                      example: 600
+                    carb:
+                      type: number
+                      example: 40
+                    protein:
+                      type: number
+                      example: 50
+                    fat:
+                      type: number
+                      example: 25
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        400:
+          description: Missing data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing data
+
+  /SetTotalData:
+    post:
+      summary: 사용자 하루 식사 저장
+      tags:
+        - User Database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: user_id_1
+                date:
+                  type: string
+                  example: 2024-05-26
+                total_data:
+                  type: object
+                  properties:
+                    calories:
+                      type: number
+                      example: 1400
+                    carb:
+                      type: number
+                      example: 120
+                    protein:
+                      type: number
+                      example: 100
+                    fat:
+                      type: number
+                      example: 50
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        400:
+          description: Missing data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing data
+
+  /GetUserInfo/{user_id}:
+    get:
+      summary: 사용자 정보
+      tags:
+        - User Database
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_sex:
+                    type: string
+                    example: male
+                  user_height:
+                    type: number
+                    example: 180
+                  user_weight:
+                    type: number
+                    example: 75
+        404:
+          description: User info not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: User info not found
+
+  /GetIntakeGoal/{user_id}:
+    get:
+      summary: 사용자 목표 섭취량
+      tags:
+        - User Database
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  calories:
+                    type: number
+                    example: 2000
+                  carb:
+                    type: number
+                    example: 250
+                  protein:
+                    type: number
+                    example: 150
+                  fat:
+                    type: number
+                    example: 70
+        404:
+          description: Intake goal not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Intake goal not found
+
+  /GetDateData/{user_id}/{date}:
+    get:
+      summary: 사용자 날짜 정보
+      tags:
+        - User Database
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2024-05-26
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  breakfast:
+                    type: object
+                    properties:
+                      pic:
+                        type: string
+                        example: ./image.jpg
+                      food:
+                        type: string
+                        example: oatmeal
+                      calories:
+                        type: number
+                        example: 300
+                      carb:
+                        type: number
+                        example: 50
+                      protein:
+                        type: number
+                        example: 10
+                      fat:
+                        type: number
+                        example: 5
+                  lunch:
+                    type: object
+                    properties:
+                      pic:
+                        type: string
+                        example: ./image.jpg
+                      food:
+                        type: string
+                        example: chicken salad
+                      calories:
+                        type: number
+                        example: 500
+                      carb:
+                        type: number
+                        example: 30
+                      protein:
+                        type: number
+                        example: 40
+                      fat:
+                        type: number
+                        example: 20
+                  dinner:
+                    type: object
+                    properties:
+                      pic:
+                        type: string
+                        example: ./image.jpg
+                      food:
+                        type: string
+                        example: grilled fish
+                      calories:
+                        type: number
+                        example: 600
+                      carb:
+                        type: number
+                        example: 40
+                      protein:
+                        type: number
+                        example: 50
+                      fat:
+                        type: number
+                        example: 25
+                  total:
+                    type: object
+                    properties:
+                      calories:
+                        type: number
+                        example: 1400
+                      carb:
+                        type: number
+                        example: 120
+                      protein:
+                        type: number
+                        example: 100
+                      fat:
+                        type: number
+                        example: 50
+                  remaining_intake:
+                    type: object
+                    properties:
+                      calories:
+                        type: number
+                        example: 600
+                      carb:
+                        type: number
+                        example: 130
+                      protein:
+                        type: number
+                        example: 50
+                      fat:
+                        type: number
+                        example: 20
+        404:
+          description: Date data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Date data not found
+
+  /GetBreakfastData/{user_id}/{date}:
+    get:
+      summary: 사용자 아침 식사 정보
+      tags:
+        - User Database
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2024-05-26
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pic:
+                    type: string
+                    example: ./image.jpg
+                  food:
+                    type: string
+                    example: oatmeal
+                  calories:
+                    type: number
+                    example: 300
+                  carb:
+                    type: number
+                    example: 50
+                  protein:
+                    type: number
+                    example: 10
+                  fat:
+                    type: number
+                    example: 5
+        404:
+          description: Breakfast data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Breakfast data not found
+
+  /GetLunchData/{user_id}/{date}:
+    get:
+      summary: 사용자 점심 식사 정보
+      tags:
+        - User Database
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2024-05-26
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pic:
+                    type: string
+                    example: ./image.jpg
+                  food:
+                    type: string
+                    example: chicken salad
+                  calories:
+                    type: number
+                    example: 500
+                  carb:
+                    type: number
+                    example: 30
+                  protein:
+                    type: number
+                    example: 40
+                  fat:
+                    type: number
+                    example: 20
+        404:
+          description: Lunch data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Lunch data not found
+
+  /GetDinnerData/{user_id}/{date}:
+    get:
+      summary: 사용자 저녁 식사 정보
+      tags:
+        - User Database
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2024-05-26
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pic:
+                    type: string
+                    example: ./image.jpg
+                  food:
+                    type: string
+                    example: grilled fish
+                  calories:
+                    type: number
+                    example: 600
+                  carb:
+                    type: number
+                    example: 40
+                  protein:
+                    type: number
+                    example: 50
+                  fat:
+                    type: number
+                    example: 25
+        404:
+          description: Dinner data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Dinner data not found
+
+  /GetTotalData/{user_id}/{date}:
+    get:
+      summary: 사용자 하루 식사 정보
+      tags:
+        - User Database
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2024-05-26
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  calories:
+                    type: number
+                    example: 1400
+                  carb:
+                    type: number
+                    example: 120
+                  protein:
+                    type: number
+                    example: 100
+                  fat:
+                    type: number
+                    example: 50
+        404:
+          description: Total data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Total data not found
+
+  /GetRemainingIntake/{user_id}/{date}:
+    get:
+      summary: 사용자 남은 목표 섭취량
+      tags:
+        - User Database
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 2024-05-26
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  calories:
+                    type: number
+                    example: 600
+                  carb:
+                    type: number
+                    example: 130
+                  protein:
+                    type: number
+                    example: 50
+                  fat:
+                    type: number
+                    example: 20
+        404:
+          description: Remaining intake data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Remaining intake data not found
