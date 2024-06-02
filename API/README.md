@@ -19,5 +19,5 @@
 ### 🚀 실행
 1. **`app.py`** 파일을 실행시킵니다. <br><br>
 
-### 🌈 Swagger API
-**`localhost:5000/swagger`**
+### 🌈 _How to use API_
+_**Swagger :**_ **`localhost:5000/swagger`**
