@@ -15,22 +15,5 @@
     <p>Recommended Protein: {{ intake_goal.protein }}g</p>
     <p>Recommended Fat: {{ intake_goal.fat }}g</p>
     <a href="{{ url_for('main.logout') }}">Logout</a>
-    <button onclick="showToken()">Show Token and Payload</button>
-    <div id="token" style="display:none;">
-        <h3>JWT Token</h3>
-        <p>{{ token | default('N/A') }}</p>
-        <h3>Payload</h3>
-        <pre>{{ payload | tojson | default('{}') }}</pre>
-    </div>
-    <script>
-        function showToken() {
-            var tokenDiv = document.getElementById('token');
-            if (tokenDiv.style.display === 'none') {
-                tokenDiv.style.display = 'block';
-            } else {
-                tokenDiv.style.display = 'none';
-            }
-        }
-    </script>
 </body>
 </html>
