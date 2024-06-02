@@ -1,4 +1,5 @@
-## 🧑🏼‍🍳 Food recognition 사용법
+### 🧑🏼‍🍳 API 사용법 
+* * *
 
 ### 🔗 Google Drive에서 음식 분류 및 양 추정 모델 다운로드
 1. Google Drive 다운로드 링크로 이동합니다.  
