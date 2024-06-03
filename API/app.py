@@ -2,7 +2,8 @@ import os
 import sys
 from flask import Flask, jsonify
 from flask_cors import CORS
-from flask_swagger_ui import get_swaggerui_blueprint    
+from flask_swagger_ui import get_swaggerui_blueprint
+from flask_jwt_extended import JWTManager
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'Firebase'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'Food recognition'))
@@ -12,6 +13,10 @@ from foodRecognition import foodRecognition_BP
 
 app = Flask(__name__)
 CORS(app)
+
+# JWT 설정
+app.config['JWT_SECRET_KEY'] = 'secret_key'  # Change this to a random secret key
+jwt = JWTManager(app)
 
 # Register blueprint
 app.register_blueprint(firebase_BP)
