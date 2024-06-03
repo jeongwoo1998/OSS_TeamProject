@@ -23,7 +23,8 @@
 <br><br>
 3. Firebase에서 json을 가져와 authenticaiotn/firebase_auth.json에
 <br><br>
-#### google_oauth_clinet.json<br>
+
+#### google_oauth_clinet.json <br>
 1. firebase 프로젝트 개요 오른쪽의 톱나바퀴 설정 버튼을 누릅니다. <br>
 2. 프로젝트 설정 창이 나오면 서비스 계정에 들어갑니다.<br>
 3. Firebase Admin SDK를 선택하고, 새 비공개 키 생성을 누릅니다<br>
