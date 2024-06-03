@@ -11,7 +11,56 @@ info:
 servers:
   - url: http://localhost:5000
     description: Local server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
 paths:
+  /UserLogin:
+    post:
+      summary: 사용자 로그인
+      tags:
+        - Login
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: test
+                password:
+                  type: string
+                  example: test
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+        '401':
+          description: Bad username or password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Bad username or password
+                    
   /UploadImage:
     post:
       summary: 이미지 업로드
@@ -933,10 +982,11 @@ paths:
                     example: Remaining intake data not found
 
   /quantity:
-    post:
-      tags:
-        - Food Recognition    
+    post:  
       summary: 음식량 인식
+      tags:
+        - Food Recognition  
+      security: []
       requestBody:
         required: true
         content:
@@ -986,6 +1036,7 @@ paths:
       summary: 음식 인식
       tags:
         - Food Recognition
+      security: []
       requestBody:
         required: true
         content:
@@ -1053,6 +1104,7 @@ paths:
       summary: API 테스트
       tags:
         - Test
+      security: []
       responses:
         '200':
           description: API 테스트 성공
