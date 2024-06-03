@@ -1,21 +1,26 @@
 ### 🧑🏼‍🍳 OSS 0Kcal Login API
 ## 🔥 2024.06.04 UPDATE
 ## ⚠⚠해당 서버 코드의 localhost 포트는 windows 기준으로 작성되어 있습니다
-## ⚠⚠ MAC의 Airplay 프로그램을 완전히 종료 한 뒤 사용하거나 포트 번호를 변경한 뒤에 사용해 주시기 바랍니다.
+## ⚠⚠ MAC의 Airplay 프로그램을 완전히 종료 한 뒤 사용하거나 <br> 
+## 포트 번호를 변경한 뒤에 사용해 주시기 바랍니다.
 <br>
 <br>
+*****
 <br>
 1. 해당 서버 프로그램은 VScode에서 실행을 기준으로 합니다
 <br>
 <br>
 2.  Console을 실행하여
-<br><br>
+<br>
+
+```prompt
     python -m venv venv
     venv\Scripts\activate
     pip install -r requirements.txt
-<br><br>
+```
+<br>
 해당 작업으로 venv라는 가상환경을 생성
-<br><br><br><br>
+<br><br>
 3. Firebase에서 json을 가져와 authenticaiotn/firebase_auth.json에
 <br><br>
 google_oauth_clinet.json<br>
@@ -102,4 +107,4 @@ kakao_oauth_client.json <br>
   }
 ```
 <br><br>
-5. app.py 실행합니다.
+5. app.py 실행합니다.⛏
