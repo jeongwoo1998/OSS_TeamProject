@@ -1,3 +1,5 @@
+# Flask 웹 애플리케이션에서 Google 및 Kakao OAuth 2.0 로그인을 처리하고,
+# Firebase 인증 및 사용자 데이터를 관리하는 코드입니다.
 from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
 from datetime import datetime, timedelta
 import json
@@ -18,14 +20,23 @@ from apscheduler.schedulers.background import BackgroundScheduler
 bp = Blueprint('main', __name__)
 
 # 절대 경로로 Firebase Admin SDK 서비스 계정 인증 파일 로드
-service_account_path = os.path.join(os.path.dirname(__file__), 'authentication/service_account_key.json')
+service_account_path = os.path.join(os.path.dirname(__file__), 'authentication/google_service_account_key.json')
 cred = credentials.Certificate(service_account_path)
 firebase_admin.initialize_app(cred)
 
 # 절대 경로로 OAuth 2.0 클라이언트 구성 파일 로드
-oauth_client_path = os.path.join(os.path.dirname(__file__), 'authentication/oauth_client.json')
+oauth_client_path = os.path.join(os.path.dirname(__file__), 'authentication/google_oauth_client.json')
 with open(oauth_client_path) as f:
     config = json.load(f)
+
+# 카카오 API 설정 파일 로드
+kakao_oauth_client_path = os.path.join(os.path.dirname(__file__), 'authentication/kakao_oauth_client.json')
+with open(kakao_oauth_client_path) as f:
+    kakao_config = json.load(f)
+
+KAKAO_CLIENT_ID = kakao_config["apiKey"]
+KAKAO_CLIENT_SECRET = kakao_config["apiSecret"]
+KAKAO_REDIRECT_URI = kakao_config["redirect_uri"]
 
 firebase = pyrebase.initialize_app(config)
 auth_pyrebase = firebase.auth()
@@ -39,10 +50,46 @@ flow = Flow.from_client_secrets_file(
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
     redirect_uri="http://localhost:5000/login/callback"
 )
+
 # JWT 비밀 키 설정
 JWT_SECRET = 'oss_is_hard'
 JWT_ALGORITHM = 'HS256'
 JWT_EXP_DELTA_SECONDS = 3600  # 1 hour
+
+#kakao login 
+class Kakao_Oauth:
+
+    def __init__(self):
+        self.auth_server = "https://kauth.kakao.com%s"
+        self.api_server = "https://kapi.kakao.com%s"
+        self.default_header = {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Cache-Control": "no-cache",
+        }
+
+    def auth(self, code):
+        return requests.post(
+            url=self.auth_server % "/oauth/token",
+            headers=self.default_header,
+            data={
+                "grant_type": "authorization_code",
+                "client_id": KAKAO_CLIENT_ID,
+                "client_secret": KAKAO_CLIENT_SECRET,
+                "redirect_uri": KAKAO_REDIRECT_URI,
+                "code": code,
+            },
+        ).json()
+    
+    def userinfo(self, bearer_token):
+        return requests.post(
+            url=self.api_server % "/v2/user/me",
+            headers={
+                **self.default_header,
+                **{"Authorization": bearer_token}
+            },
+            #"property_keys":'["kakao_account.profile_image_url"]'
+            data={}
+        ).json()
 
 # 권장 칼로리 계산 함수
 def calculate_recommended_calories(weight, height, age, sex, activity_level):
@@ -50,7 +97,7 @@ def calculate_recommended_calories(weight, height, age, sex, activity_level):
         bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
     else:
         bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
-    
+
     activity_multiplier = {
         'sedentary': 1.2,
         'lightly_active': 1.375,
@@ -148,6 +195,68 @@ def callback():
         return redirect(url_for('main.profile', token=jwt_token))
     except Exception as e:
         return jsonify({'message': 'Callback processing failed', 'error': str(e)}), 500
+    
+# 카카오 로그인
+@bp.route('/login/kakao')
+def login_kakao():
+    return redirect(
+        f"https://kauth.kakao.com/oauth/authorize?client_id={KAKAO_CLIENT_ID}&redirect_uri={KAKAO_REDIRECT_URI}&response_type=code"
+    )
+
+@bp.route('/login/kakao/callback')
+def login_kakao_callback():
+    try:
+        code = request.args.get('code')
+        # 전달받은 authorization code를 통해서 access_token을 발급
+        kakao_oauth=Kakao_Oauth()
+        auth_info= kakao_oauth.auth(code)
+        # error 발생 시 로그인 페이지로 redirect
+        if "error" in auth_info:
+            print("에러가 발생했습니다.")
+            return {'message': '인증 실패'}, 404
+        #error가 없을 때
+        
+        user = kakao_oauth.userinfo("Bearer "+auth_info['access_token'])
+        #print(user)
+        kakao_account = user["kakao_account"]
+        #print(kakao_account)
+        profile = kakao_account['profile']
+        session['kakao_id']=user['id']
+        session['name'] = profile['nickname']
+        session['email'] = kakao_account['email']
+        #print(type(session['kakao_id']))
+        # Firebase 사용자 인증 생성 및 로그인
+        try:
+            user = kakao_oauth.userinfo("Bearer"+auth_info['access_token'])
+        except firebase_admin.auth.UserNotFoundError:
+            user = auth.create_user(
+                uid=str(session['kakao_id']),
+                email=session['email'],
+                name=session['name']
+            )
+
+        # Pyrebase를 사용하여 Firebase에 로그인
+        try:
+            custom_token = auth.create_custom_token(session['kakao_id'])
+            custom_token_str = custom_token.decode('utf-8')
+            pyrebase_user = auth_pyrebase.sign_in_with_custom_token(custom_token_str)
+        except Exception as e:
+            return jsonify({'message': 'Firebase authentication failed', 'error': str(e)}), 500
+
+        # JWT 생성
+        payload = {
+            'sub': str(session['kakao_id']),
+            'name': session['name'],
+            'email': session['email'],
+            'exp': datetime.utcnow() + timedelta(seconds=JWT_EXP_DELTA_SECONDS)
+        }
+        jwt_token = jwt.encode(payload, JWT_SECRET, JWT_ALGORITHM)
+
+        session['id_token'] = pyrebase_user['idToken']
+      
+        return redirect(url_for('main.profile', token=jwt_token))
+    except Exception as e:
+        return jsonify({'message': 'Kakao callback processing failed', 'error': str(e)}), 500
 
 @bp.route('/profile')
 def profile():
