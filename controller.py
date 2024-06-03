@@ -221,7 +221,7 @@ def login_kakao_callback():
         kakao_account = user["kakao_account"]
         #print(kakao_account)
         profile = kakao_account['profile']
-        session['kakao_id']=user['id']
+        session['kakao_id']=str(user['id'])
         session['name'] = profile['nickname']
         session['email'] = kakao_account['email']
         #print(type(session['kakao_id']))
@@ -264,7 +264,6 @@ def profile():
         token = request.args.get('token')
         if not token:
             return redirect(url_for('main.index'))
-
         try:
             payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         except jwt.ExpiredSignatureError:
@@ -291,6 +290,8 @@ def submit_profile():
         except jwt.InvalidTokenError:
             payload = {}
 
+        name = request.form.get('name')  # 수정된 이름을 받음
+        email = payload.get('email', 'unknown_email')  # JWT 토큰에서 이메일을 가져옴
         height = int(request.form.get('height'))
         weight = int(request.form.get('weight'))
         sex = request.form.get('sex')
@@ -302,6 +303,8 @@ def submit_profile():
 
         user_data = {
             "user_info": {
+                "user_name": name,  # 수정된 이름을 사용
+                "user_email": email,  # 이메일은 JWT에서 가져온 그대로 사용
                 "user_height": height,
                 "user_weight": weight,
                 "user_sex": sex,
