@@ -1,8 +1,8 @@
-### 🧑🏼‍🍳 OSS 0Kcal Login API
-## 🔥 2024.06.04 UPDATE
-## ⚠⚠해당 서버 코드의 localhost 포트는 windows 기준으로 작성되어 있습니다
-## ⚠⚠ MAC의 Airplay 프로그램을 완전히 종료 한 뒤 사용하거나 <br> 
-## 포트 번호를 변경한 뒤에 사용해 주시기 바랍니다.
+# 🧑🏼‍🍳 OSS 0Kcal Login API
+### 🔥 2024.06.04 UPDATE
+## ⚠ 해당 서버 코드의 localhost 포트는 windows 기준으로 작성되어 있습니다
+## ⚠ MAC의 Airplay 프로그램을 완전히 종료 한 뒤 사용하거나 <br> 
+## ⚠ 포트 번호를 변경한 뒤에 사용해 주시기 바랍니다.
 <br>
 <br>
 *****
@@ -23,7 +23,7 @@
 <br><br>
 3. Firebase에서 json을 가져와 authenticaiotn/firebase_auth.json에
 <br><br>
-google_oauth_clinet.json<br>
+#### google_oauth_clinet.json<br>
 1. firebase 프로젝트 개요 오른쪽의 톱나바퀴 설정 버튼을 누릅니다. <br>
 2. 프로젝트 설정 창이 나오면 서비스 계정에 들어갑니다.<br>
 3. Firebase Admin SDK를 선택하고, 새 비공개 키 생성을 누릅니다<br>
@@ -58,7 +58,7 @@ google_oauth_clinet.json<br>
   }
 ```
 <br><br>
-google_service_account_key.json<br>
+#### google_service_account_key.json<br>
 1. firebase 프로젝트 개요 오른쪽의 톱나바퀴 설정 버튼을 누릅니다. <br>
 2. 프로젝트 설정 창이 나오면 서비스 계정에 들어갑니다.<br>
 3. 구글 클라우드 링크로 된 _서비스 계정_ 라 적힌 링크로 접속합니다 <br>
@@ -87,7 +87,7 @@ google_service_account_key.json<br>
   }
 ```
 <br><br>
-kakao_oauth_client.json <br>
+#### kakao_oauth_client.json <br>
 1.  https://developers.kakao.com/console/app 에 접속합니다.<br>
 2. 애플리케이션을 추가합니다. <br>
 #### 3. (⚠중요⚠) 이미지를 추가 해야 비즈니스가 가능해지니 꼭 이미지를 1개 업로드 해야 합니다. <br>
