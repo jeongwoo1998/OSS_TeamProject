@@ -1,8 +1,10 @@
 import os
-from flask import Blueprint, request, jsonify
+from flask import Flask, Blueprint, request, jsonify
 import firebase_admin
 from firebase_admin import credentials, db, storage
+from flask_jwt_extended import create_access_token, jwt_required
 
+app = Flask(__name__)
 firebase_BP = Blueprint('firebase', __name__)
 
 service_account_key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
@@ -14,8 +16,25 @@ firebase_admin.initialize_app(cred, {
     'storageBucket': 'oss-teamproject.appspot.com'
 })
 
+# JWT Example
+@firebase_BP.route('/UserLogin', methods=['POST'])
+def UserLogin():
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
+
+    '''
+    Here you should add login logic
+    '''
+ 
+    if username != 'test' or password != 'test':  # Example validation
+        return jsonify({"error": "Bad username or password"}), 401
+
+    access_token = create_access_token(identity = username)
+    return jsonify(access_token=access_token), 200
+
 # Upload Image
 @firebase_BP.route('/UploadImage', methods=['POST'])
+@jwt_required()
 def UploadImage():
     if 'image' not in request.files:
         return jsonify({'error': 'Missing image file'}), 400
@@ -35,6 +54,7 @@ def UploadImage():
 
 # Set User ID
 @firebase_BP.route('/SetUserID', methods=['POST'])
+@jwt_required()
 def SetUserID():
     data = request.json
     user_id = data.get('user_id')
@@ -49,6 +69,7 @@ def SetUserID():
 
 # Set User Info
 @firebase_BP.route('/SetUserInfo', methods=['POST'])
+@jwt_required()
 def SetUserInfo():
     data = request.json
     user_id = data.get('user_id')
@@ -64,6 +85,7 @@ def SetUserInfo():
 
 # Set Intake Goal
 @firebase_BP.route('/SetIntakeGoal', methods=['POST'])
+@jwt_required()
 def SetIntakeGoal():
     data = request.json
     user_id = data.get('user_id')
@@ -81,6 +103,7 @@ def SetIntakeGoal():
 
 # Set Date data
 @firebase_BP.route('/SetDate', methods=['POST'])
+@jwt_required()
 def SetDate():
     data = request.json
     user_id = data.get('user_id')
@@ -97,6 +120,7 @@ def SetDate():
 
 # Set Breakfast Data
 @firebase_BP.route('/SetBreakfastData', methods=['POST'])
+@jwt_required()
 def SetBreakfastData():
     data = request.json
     user_id = data.get('user_id')
@@ -115,6 +139,7 @@ def SetBreakfastData():
 
 # Set Lunch Data
 @firebase_BP.route('/SetLunchData', methods=['POST'])
+@jwt_required()
 def SetLunchData():
     data = request.json
     user_id = data.get('user_id')
@@ -133,6 +158,7 @@ def SetLunchData():
 
 # Set Dinner Data
 @firebase_BP.route('/SetDinnerData', methods=['POST'])
+@jwt_required()
 def SetDinnerData():
     data = request.json
     user_id = data.get('user_id')
@@ -151,6 +177,7 @@ def SetDinnerData():
 
 # Set Total Data
 @firebase_BP.route('/SetTotalData', methods=['POST'])
+@jwt_required()
 def SetTotalData():
     data = request.json
     user_id = data.get('user_id')
@@ -233,6 +260,7 @@ def update_remaining_intake_for_all_dates(user_id):
 
 # Get User Info Data
 @firebase_BP.route('/GetUserInfo/<user_id>', methods=['GET'])
+@jwt_required()
 def GetUserInfo(user_id):
     ref = db.reference(f'/users/{user_id}/user_info')
     user_info = ref.get()
@@ -244,6 +272,7 @@ def GetUserInfo(user_id):
 
 # Get Intake Goal Data
 @firebase_BP.route('/GetIntakeGoal/<user_id>', methods=['GET'])
+@jwt_required()
 def GetIntakeGoal(user_id):
     ref = db.reference(f'/users/{user_id}/intake_goal')
     intake_goal = ref.get()
@@ -255,6 +284,7 @@ def GetIntakeGoal(user_id):
 
 # Get Date Data
 @firebase_BP.route('/GetDateData/<user_id>/<date>', methods=['GET'])
+@jwt_required()
 def GetDateData(user_id, date):
     ref = db.reference(f'/users/{user_id}/date/{date}')
     date_data = ref.get()
@@ -266,6 +296,7 @@ def GetDateData(user_id, date):
 
 # Get Breakfast Data
 @firebase_BP.route('/GetBreakfastData/<user_id>/<date>', methods=['GET'])
+@jwt_required()
 def GetBreakfastData(user_id, date):
     ref = db.reference(f'/users/{user_id}/date/{date}/breakfast')
     breakfast_data = ref.get()
@@ -277,6 +308,7 @@ def GetBreakfastData(user_id, date):
 
 # Get Lunch Data
 @firebase_BP.route('/GetLunchData/<user_id>/<date>', methods=['GET'])
+@jwt_required()
 def GetLunchData(user_id, date):
     ref = db.reference(f'/users/{user_id}/date/{date}/lunch')
     lunch_data = ref.get()
@@ -288,6 +320,7 @@ def GetLunchData(user_id, date):
 
 # Get Dinner Data
 @firebase_BP.route('/GetDinnerData/<user_id>/<date>', methods=['GET'])
+@jwt_required()
 def GetDinnerData(user_id, date):
     ref = db.reference(f'/users/{user_id}/date/{date}/dinner')
     dinner_data = ref.get()
@@ -299,6 +332,7 @@ def GetDinnerData(user_id, date):
 
 # Get Total Data
 @firebase_BP.route('/GetTotalData/<user_id>/<date>', methods=['GET'])
+@jwt_required()
 def GetTotalData(user_id, date):
     ref = db.reference(f'/users/{user_id}/date/{date}/total')
     total_data = ref.get()
@@ -310,6 +344,7 @@ def GetTotalData(user_id, date):
 
 # Get Remaining Intake Data
 @firebase_BP.route('/GetRemainingIntake/<user_id>/<date>', methods=['GET'])
+@jwt_required()
 def GetRemainingIntake(user_id, date):
     ref = db.reference(f'/users/{user_id}/date/{date}/remaining_intake')
     remaining_intake = ref.get()
