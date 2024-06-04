@@ -9,6 +9,9 @@ export default function FirstPage({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('KakaoLogin')}>
           <Image source={require('./assets/kakaoLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SecondPage')}>
+          <Image source={require('./assets/naverLogin.png')} style={styles.buttonImage} resizeMode="contain" />
+        </TouchableOpacity>
 
         </View>
     </View>
