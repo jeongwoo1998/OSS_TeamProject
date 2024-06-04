@@ -131,4 +131,34 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
       },
+
+      genderButton: {
+        flex: 1,
+        marginHorizontal: 5,
+        paddingVertical: 10,
+        borderWidth: 1,
+        borderColor: '#000',
+        borderRadius: 5,
+        alignItems: 'center',
+      },
+      selectedButton: {
+        backgroundColor: 'lightgreen',
+      },
+      selectedButtonText: {
+        color: '#FFFFFF',
+      },
+      infoButton: {
+        flex: 2,
+        marginHorizontal: 5,
+        paddingVertical: 10,
+        borderWidth: 1,
+        borderColor: '#000',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      buttonText: {
+        fontSize: 16,
+        color: '#04B431',
+      },
 });
