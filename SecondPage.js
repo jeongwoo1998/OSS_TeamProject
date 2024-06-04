@@ -114,4 +114,9 @@ const styles = StyleSheet.create({
       paddingTop: 50,
       backgroundColor: '#FFFFFF',
     },
+    image: {
+        width: 200,
+        height: 200,
+        marginBottom: 20,
+      },
 });
