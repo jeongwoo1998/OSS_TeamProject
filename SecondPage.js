@@ -15,5 +15,10 @@ export default function SecondPage({ navigation }) {
     weightData.push({ key: i, label: `${i} kg` });
   }
 
+  const heightData = [];
+  for (let i = 130; i <= 200; i++) {
+    heightData.push({ key: i, label: `${i} cm` });
+  }
+
 
 }
