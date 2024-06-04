@@ -10,4 +10,10 @@ export default function SecondPage({ navigation }) {
   const [weightModalVisible, setWeightModalVisible] = useState(false);
   const [heightModalVisible, setHeightModalVisible] = useState(false);
 
+  const weightData = [];
+  for (let i = 50; i <= 120; i++) {
+    weightData.push({ key: i, label: `${i} kg` });
+  }
+
+
 }
