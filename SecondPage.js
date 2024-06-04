@@ -56,6 +56,13 @@ export default function SecondPage({ navigation }) {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.row}>
+        <Text style={styles.label}>체중</Text>
+        <TouchableOpacity style={styles.infoButton} onPress={() => setWeightModalVisible(true)}>
+          <Text style={styles.buttonText}>{weight}</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 }
