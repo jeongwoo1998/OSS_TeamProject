@@ -32,11 +32,18 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         marginBottom: 50, 
-      },
+    },
     buttonContainer: {
      width: '80%',
      flexDirection: 'column',
      justifyContent: 'space-between',
      alignItems: 'center',
+    },
+    button: {
+        width: '100%',
+        height: 50, 
+        marginVertical: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
