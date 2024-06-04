@@ -20,5 +20,10 @@ export default function SecondPage({ navigation }) {
     heightData.push({ key: i, label: `${i} cm` });
   }
 
+  const handleWeightSelect = (selectedWeight) => {
+    setWeight(`${selectedWeight} kg`);
+    setWeightModalVisible(false);
+  };
+
 
 }
