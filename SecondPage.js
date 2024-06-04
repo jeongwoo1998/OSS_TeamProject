@@ -118,5 +118,17 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         marginBottom: 20,
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 10,
+        width: '80%',
+      },
+      label: {
+        flex: 1,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 16,
       },
 });
