@@ -25,5 +25,10 @@ export default function SecondPage({ navigation }) {
     setWeightModalVisible(false);
   };
 
+  const handleHeightSelect = (selectedHeight) => {
+    setHeight(`${selectedHeight} cm`);
+    setHeightModalVisible(false);
+  };
+
 
 }
