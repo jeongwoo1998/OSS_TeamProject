@@ -33,6 +33,21 @@ export default function SecondPage({ navigation }) {
   return (
       <View style={styles.container}>
         <Image source={require('./assets/dummy.png')} style={styles.image} resizeMode="contain" />
+        <View style={styles.row}>
+        <Text style={styles.label}>성별</Text>
+        <TouchableOpacity 
+          style={[styles.genderButton, genderVal === 'male' && styles.selectedButton]}
+          onPress={() => setGenderVal('male')}
+        >
+          <Text style={[styles.buttonText, genderVal === 'male' && styles.selectedButtonText]}>남</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={[styles.genderButton, genderVal === 'female' && styles.selectedButton]}
+          onPress={() => setGenderVal('female')}
+        >
+          <Text style={[styles.buttonText, genderVal === 'female' && styles.selectedButtonText]}>여</Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
   );
