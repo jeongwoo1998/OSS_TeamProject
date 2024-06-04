@@ -15,8 +15,17 @@ export default function FirstPage({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SecondPage')}>
           <Image source={require('./assets/googleLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
-
         </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'flex-start',
+      paddingTop: 50,
+      alignItems: 'center',
+      backgroundColor: '#FFFFFF', 
+    },
+});
