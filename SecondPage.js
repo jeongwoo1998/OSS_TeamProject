@@ -174,4 +174,24 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 16,
     },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+      modalContent: {
+        width: 300,
+        maxHeight: '50%',
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10,
+    },
+      modalItem: {
+        paddingVertical: 10,
+    },
+      modalItemText: {
+        fontSize: 18,
+        textAlign: 'center',
+    },
 });
