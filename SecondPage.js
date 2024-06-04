@@ -67,6 +67,41 @@ export default function SecondPage({ navigation }) {
         <Text style={styles.nextButtonText}>시작하기</Text>
       </TouchableOpacity>
 
+      <Modal
+        transparent={true}
+        visible={weightModalVisible}
+        onRequestClose={() => setWeightModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <ScrollView>
+              {weightData.map((item) => (
+                <TouchableOpacity key={item.key} style={styles.modalItem} onPress={() => handleWeightSelect(item.key)}>
+                  <Text style={styles.modalItemText}>{item.label}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        transparent={true}
+        visible={heightModalVisible}
+        onRequestClose={() => setHeightModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <ScrollView>
+              {heightData.map((item) => (
+                <TouchableOpacity key={item.key} style={styles.modalItem} onPress={() => handleHeightSelect(item.key)}>
+                  <Text style={styles.modalItemText}>{item.label}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
