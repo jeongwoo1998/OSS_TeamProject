@@ -124,15 +124,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginVertical: 10,
         width: '80%',
-      },
+    },
       label: {
         flex: 1,
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 16,
-      },
-
-      genderButton: {
+    },
+    genderButton: {
         flex: 1,
         marginHorizontal: 5,
         paddingVertical: 10,
@@ -140,14 +139,14 @@ const styles = StyleSheet.create({
         borderColor: '#000',
         borderRadius: 5,
         alignItems: 'center',
-      },
-      selectedButton: {
+    },
+    selectedButton: {
         backgroundColor: 'lightgreen',
-      },
-      selectedButtonText: {
+    },
+    selectedButtonText: {
         color: '#FFFFFF',
-      },
-      infoButton: {
+    },
+    infoButton: {
         flex: 2,
         marginHorizontal: 5,
         paddingVertical: 10,
@@ -156,9 +155,23 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      buttonText: {
+    },
+    buttonText: {
         fontSize: 16,
         color: '#04B431',
-      },
+    },
+    nextButton: {
+        position: 'absolute',
+        bottom: 100,
+        width: width * 0.8,
+        left: width * 0.1,
+        paddingVertical: 10,
+        backgroundColor: '#32CD32',
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    nextButtonText: {
+        color: '#FFFFFF',
+        fontSize: 16,
+    },
 });
