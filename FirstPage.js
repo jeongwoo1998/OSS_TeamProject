@@ -28,4 +28,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#FFFFFF', 
     },
+    image: {
+        width: 200,
+        height: 200,
+        marginBottom: 50, 
+      },
 });
