@@ -63,6 +63,10 @@ export default function SecondPage({ navigation }) {
         </TouchableOpacity>
       </View>
 
+      <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Recommendation')}>
+        <Text style={styles.nextButtonText}>시작하기</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
