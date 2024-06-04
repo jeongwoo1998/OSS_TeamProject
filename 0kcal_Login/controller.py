@@ -1,5 +1,6 @@
+# contorllers.py는 
 # Flask 웹 애플리케이션에서 Google 및 Kakao OAuth 2.0 로그인을 처리하고,
-# Firebase 인증 및 사용자 데이터를 관리하는 코드입니다.
+# Firebase 인증 및 사용자 데이터를 관리하는 코드.
 from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
 from datetime import datetime, timedelta
 import json
@@ -34,10 +35,12 @@ kakao_oauth_client_path = os.path.join(os.path.dirname(__file__), 'authenticatio
 with open(kakao_oauth_client_path) as f:
     kakao_config = json.load(f)
 
+# 카카오 보안 키 로드
 KAKAO_CLIENT_ID = kakao_config["apiKey"]
 KAKAO_CLIENT_SECRET = kakao_config["apiSecret"]
 KAKAO_REDIRECT_URI = kakao_config["redirect_uri"]
 
+# Firebase 초기화
 firebase = pyrebase.initialize_app(config)
 auth_pyrebase = firebase.auth()
 db = firebase.database()
@@ -56,7 +59,7 @@ JWT_SECRET = 'oss_is_hard'
 JWT_ALGORITHM = 'HS256'
 JWT_EXP_DELTA_SECONDS = 3600  # 1 hour
 
-#kakao login 
+#kakao oauth 클래스 정의
 class Kakao_Oauth:
 
     def __init__(self):
@@ -66,7 +69,7 @@ class Kakao_Oauth:
             "Content-Type": "application/x-www-form-urlencoded",
             "Cache-Control": "no-cache",
         }
-
+    # 인증 코드로 액세스 토큰 요청
     def auth(self, code):
         return requests.post(
             url=self.auth_server % "/oauth/token",
@@ -79,7 +82,7 @@ class Kakao_Oauth:
                 "code": code,
             },
         ).json()
-    
+    # 액세스 토큰으로 사용자 정보 요청
     def userinfo(self, bearer_token):
         return requests.post(
             url=self.api_server % "/v2/user/me",
@@ -124,11 +127,11 @@ def calculate_macro_goals(calories):
         "protein": int(protein),
         "fat": int(fat)
     }
-
+# 홈페이지 라우트
 @bp.route('/')
 def index():
     return render_template('index.html')
-
+# 구글 로그인 라우트
 @bp.route('/login')
 def login():
     try:
@@ -137,7 +140,7 @@ def login():
         return redirect(authorization_url)
     except Exception as e:
         return jsonify({'message': 'Failed to initiate OAuth flow', 'error': str(e)}), 500
-
+# 구글 로그인 콜백 라우트
 @bp.route('/login/callback')
 def callback():
     try:
@@ -196,13 +199,13 @@ def callback():
     except Exception as e:
         return jsonify({'message': 'Callback processing failed', 'error': str(e)}), 500
     
-# 카카오 로그인
+# 카카오 로그인 라우트
 @bp.route('/login/kakao')
 def login_kakao():
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={KAKAO_CLIENT_ID}&redirect_uri={KAKAO_REDIRECT_URI}&response_type=code"
     )
-
+# 카카오 로그인 콜백 라우트
 @bp.route('/login/kakao/callback')
 def login_kakao_callback():
     try:
@@ -221,7 +224,7 @@ def login_kakao_callback():
         kakao_account = user["kakao_account"]
         #print(kakao_account)
         profile = kakao_account['profile']
-        session['kakao_id']=user['id']
+        session['kakao_id']=str(user['id'])
         session['name'] = profile['nickname']
         session['email'] = kakao_account['email']
         #print(type(session['kakao_id']))
@@ -257,14 +260,13 @@ def login_kakao_callback():
         return redirect(url_for('main.profile', token=jwt_token))
     except Exception as e:
         return jsonify({'message': 'Kakao callback processing failed', 'error': str(e)}), 500
-
+# 프로필 페이지 라우트
 @bp.route('/profile')
 def profile():
     try:
         token = request.args.get('token')
         if not token:
             return redirect(url_for('main.index'))
-
         try:
             payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         except jwt.ExpiredSignatureError:
@@ -279,7 +281,7 @@ def profile():
         return render_template('profile.html', user_info=user_info, token=token, payload=payload)
     except Exception as e:
         return jsonify({'message': 'Failed to load profile', 'error': str(e)}), 500
-
+# 프로필 제출 라우트
 @bp.route('/submit_profile', methods=['POST'])
 def submit_profile():
     try:
@@ -291,6 +293,8 @@ def submit_profile():
         except jwt.InvalidTokenError:
             payload = {}
 
+        name = request.form.get('name')  # 수정된 이름을 받음
+        email = payload.get('email', 'unknown_email')  # JWT 토큰에서 이메일을 가져옴
         height = int(request.form.get('height'))
         weight = int(request.form.get('weight'))
         sex = request.form.get('sex')
@@ -302,6 +306,8 @@ def submit_profile():
 
         user_data = {
             "user_info": {
+                "user_name": name,  # 수정된 이름을 사용
+                "user_email": email,  # 이메일은 JWT에서 가져온 그대로 사용
                 "user_height": height,
                 "user_weight": weight,
                 "user_sex": sex,
@@ -317,7 +323,7 @@ def submit_profile():
         return render_template('profile_result.html', user_info=user_data["user_info"], intake_goal=intake_goal, token=token, payload=payload)
     except Exception as e:
         return jsonify({'message': 'Failed to submit profile', 'error': str(e)}), 500
-
+# 로그아웃 라우트
 @bp.route('/logout')
 def logout():
     try:
