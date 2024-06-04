@@ -46,4 +46,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    buttonImage: {
+        width: '100%',
+        height: '100%',
+    },
 });
