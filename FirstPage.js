@@ -33,4 +33,10 @@ const styles = StyleSheet.create({
         height: 200,
         marginBottom: 50, 
       },
+    buttonContainer: {
+     width: '80%',
+     flexDirection: 'column',
+     justifyContent: 'space-between',
+     alignItems: 'center',
+    },
 });
