@@ -49,6 +49,13 @@ export default function SecondPage({ navigation }) {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.row}>
+        <Text style={styles.label}>키</Text>
+        <TouchableOpacity style={styles.infoButton} onPress={() => setHeightModalVisible(true)}>
+          <Text style={styles.buttonText}>{height}</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 }
