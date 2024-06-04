@@ -7,7 +7,6 @@ import SecondPage from './SecondPage';
 import ThirdPage from './ThirdPage';
 import FourthPage from './FourthPage';
 import FifthPage from './FifthPage';
-import Recommendation from './Recommendation';
 import KakaoLogin from './KakaoLogin';
 
 const Stack = createStackNavigator();
@@ -21,7 +20,6 @@ export default function App() {
         <Stack.Screen name="ThirdPage" component={ThirdPage} />
         <Stack.Screen name="FourthPage" component={FourthPage} />
         <Stack.Screen name="FifthPage" component={FifthPage} />
-        <Stack.Screen name="Recommendation" component={Recommendation} />
         <Stack.Screen name="KakaoLogin" component={KakaoLogin} />
       </Stack.Navigator>
     </NavigationContainer>
