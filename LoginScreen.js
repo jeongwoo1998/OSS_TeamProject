@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function FirstPage({ navigation }) {
+export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}> 
       <Image source={require('./assets/dummy.png')} style={styles.image} resizeMode="contain" />
@@ -9,10 +9,10 @@ export default function FirstPage({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('KakaoLogin')}>
           <Image source={require('./assets/kakaoLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SecondPage')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('UserInfo')}>
           <Image source={require('./assets/naverLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SecondPage')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('UserInfo')}>
           <Image source={require('./assets/googleLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
         </View>
