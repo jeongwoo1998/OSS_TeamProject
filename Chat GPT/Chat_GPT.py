@@ -2,9 +2,9 @@ import openai
 import json
 
 # OpenAI API KEY 설정
-openai.api_key = 'sk-my-service-account-HMaXTU2vcOz0MLxwLJEAT3BlbkFJByQH6HdnZA81MGAqBXBN'
+openai.api_key = 'YOUR_API_KEY'
 
-def get_nutrient_recommendations(remaining_nutrients):
+def food_recommendations(remaining_nutrients):
     def get_completion(prompt, model="gpt-3.5-turbo"):
         response = openai.ChatCompletion.create(
             model=model,
@@ -58,6 +58,6 @@ remaining_nutrients = {
     'fat': 25
 }
 
-recommended_foods = get_nutrient_recommendations(remaining_nutrients)
+recommended_foods = food_recommendations(remaining_nutrients)
 print("Recommended foods:")
 print(recommended_foods)
