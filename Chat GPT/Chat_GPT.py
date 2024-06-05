@@ -1,60 +1,63 @@
 import openai
 import json
 
-# OpenAI API KEY
-openai.api_key = 'YOUR_API_KEY'
+# OpenAI API KEY 설정
+openai.api_key = 'sk-my-service-account-HMaXTU2vcOz0MLxwLJEAT3BlbkFJByQH6HdnZA81MGAqBXBN'
 
-def get_completion(prompt, model="gpt-3.5-turbo"):
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0,
-    )
-    return response.choices[0].message["content"]
+def get_nutrient_recommendations(remaining_nutrients):
+    def get_completion(prompt, model="gpt-3.5-turbo"):
+        response = openai.ChatCompletion.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": "You are a nutrition expert."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.5,
+        )
+        return response.choices[0].message["content"]
 
-remaining_nutrients = [
-    {'calories': 1000, 'carbs': 200, 'protein': 36, 'fat': 50}
-]
+    # Prompt 작성
+    prompt = f"""
+    목표 섭취량까지 남은 영양 정보는 다음과 같습니다:
+    {remaining_nutrients}
 
-# Write prompt 
-prompt = f"""
-목표 섭취량까지 남은 영양 정보는 다음과 같습니다:
-{remaining_nutrients}
+    이 정보를 바탕으로 부족한 영양소를 채울 수 있는 적절한 음식을 JSON 형식으로 3가지 추천해주세요.
 
-이 정보를 바탕으로 부족한 영양소를 채울 수 있는 요리를 다음과 같이 JSON 형식으로 3가지 추천해주세요. (추천 음식은 남은 영양 정보를 초과하지 않아야 합니다.):
+    단, 제약 사항은 다음과 같습니다:
 
-[
-    {{
-        "food": "요리 이름",
-        "calories": calories,
-        "carbs": carbs,
-        "protein": protein,
-        "fat": fat
-    }},
-    {{
-        "food": "요리 이름",
-        "calories": calories,
-        "carbs": carbs,
-        "protein": protein,
-        "fat": fat
-    }},
-    {{
-        "food": "요리 이름",
-        "calories": calories,
-        "carbs": carbs,
-        "protein": protein,
-        "fat": fat
-    }}
-]
-"""
+    1. 한국에 있는 식당에서 파는 음식이어야 한다. (꼭 한식일 필요는 없음)
+    2. 음식 이름은 한글로, 아래 형식을 따라서 작성되어야 한다.
+    3. 음식은 하나씩만 추천이 가능하다. (~와, ~과 불가능)
 
-recommendation = get_completion(prompt)
+    [
+        {{
+            "food": ""
+        }},
+        {{
+            "food": ""
+        }},
+        {{
+            "food": ""
+        }}
+    ]
+    """
 
-try:
-    recommended_foods = json.loads(recommendation)
-    print("Recommend foods")
-    for food in recommended_foods:
-        print(food)
-except json.JSONDecodeError:
-    print("Failed to parse JSON:")
-    print(recommendation)
+    recommendation = get_completion(prompt)
+
+    try:
+        recommended_foods = json.loads(recommendation)
+        return recommended_foods
+    except json.JSONDecodeError:
+        return f"Failed to parse JSON: {recommendation}"
+
+# example data
+remaining_nutrients = {
+    'calories': 1000,
+    'carbs': 200,
+    'protein': 36,
+    'fat': 25
+}
+
+recommended_foods = get_nutrient_recommendations(remaining_nutrients)
+print("Recommended foods:")
+print(recommended_foods)
