@@ -76,7 +76,7 @@ export default function SecondPage({ navigation }) {
       </View>
 
       {/* 시작하기 버튼을 누르면 navigate에서 설정해 둔 페이지로 넘어감 */}
-      <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('ThirdPage')}>
+      <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('DummyPage')}>
         <Text style={styles.nextButtonText}>시작하기</Text>
       </TouchableOpacity>
 
