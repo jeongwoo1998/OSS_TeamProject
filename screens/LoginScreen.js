@@ -4,16 +4,16 @@ import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}> 
-      <Image source={require('./assets/dummy.png')} style={styles.image} resizeMode="contain" />
+      <Image source={require('../assets/dummy.png')} style={styles.image} resizeMode="contain" />
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('KakaoLogin')}>
-          <Image source={require('./assets/kakaoLogin.png')} style={styles.buttonImage} resizeMode="contain" />
+          <Image source={require('../assets/kakaoLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('UserInfo')}>
-          <Image source={require('./assets/naverLogin.png')} style={styles.buttonImage} resizeMode="contain" />
+          <Image source={require('../assets/naverLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('UserInfo')}>
-          <Image source={require('./assets/googleLogin.png')} style={styles.buttonImage} resizeMode="contain" />
+          <Image source={require('../assets/googleLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
         </View>
     </View>

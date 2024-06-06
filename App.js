@@ -7,17 +7,17 @@ import NutritionStatsScreen from './screens/NutritionStatsScreen';
 import GoalSettingScreen from './screens/GoalSettingScreen';
 import NutritionInfoScreen from './screens/NutritionInfoScreen';
 import RestaurantRecommendationScreen from './screens/RestaurantRecommendationScreen';
-import LoginScreen from './LoginScreen';
-import UserInfo from './UserInfo';
+import LoginScreen from './screens/LoginScreen';
+import UserInfoScreen from './screens/UserInfoScreen';
 import DummyPage from './DummyPage';
-import KakaoLogin from './KakaoLogin';
+import KakaoLogin from './screens/KakaoLogin';
 
 const Stack = createStackNavigator();
 
 const screens = [
   { name: 'Login', component: LoginScreen }, // 로그인 화면
   { name: 'Kakao', component: KakaoLogin }, // 카카오 로그인 연동 화면
-  { name: 'UserInfo', component: HomeScreen }, // 로그인 시 회원정보 입력 화면
+  { name: 'UserInfo', component: UserInfoScreen }, // 로그인 시 회원정보 입력 화면
   { name: 'Home', component: HomeScreen }, // 메인 화면
   { name: 'NutritionStats', component: NutritionStatsScreen }, // 영양 통계 화면
   { name: 'GoalSetting', component: GoalSettingScreen }, // 목표 섭취량 설정 화면

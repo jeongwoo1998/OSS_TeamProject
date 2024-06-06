@@ -5,7 +5,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions, Modal, Scr
 const { width } = Dimensions.get('window');
 
 // SecondPage 컴포넌트를 정의
-export default function SecondPage({ navigation }) {
+export default function UserInfoScreen({ navigation }) {
   // 성별, 몸무게, 키, 몸무게 모달 가시성, 키 모달 가시성 관련 상태변수 셋팅.
   const [genderVal, setGenderVal] = useState('');
   const [weight, setWeight] = useState('60 kg'); // 몸무게 버튼의 기본 값 셋팅
@@ -40,7 +40,7 @@ export default function SecondPage({ navigation }) {
   return (
     <View style={styles.container}>
       {/* 앱 로고 이미지 표시 */}
-      <Image source={require('./assets/dummy.png')} style={styles.image} resizeMode="contain" />
+      <Image source={require('../assets/dummy.png')} style={styles.image} resizeMode="contain" />
       
       {/* 성별 선택 */}
       <View style={styles.row}>
@@ -78,7 +78,7 @@ export default function SecondPage({ navigation }) {
       </View>
 
       {/* 시작하기 버튼을 누르면 navigate에서 설정해 둔 페이지로 넘어감 */}
-      <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('DummyPage')}>
+      <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Home')}>
         <Text style={styles.nextButtonText}>시작하기</Text>
       </TouchableOpacity>
 
