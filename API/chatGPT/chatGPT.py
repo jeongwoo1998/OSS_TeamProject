@@ -2,7 +2,7 @@ import openai
 import json
 
 # OpenAI API KEY 설정
-openai.api_key = 'sk-my-service-account-HMaXTU2vcOz0MLxwLJEAT3BlbkFJByQH6HdnZA81MGAqBXBN'
+openai.api_key = 'YOUR_API_KEY'
 
 def food_recommendations(remaining_intake):
     def get_completion(prompt, model="gpt-3.5-turbo"):
