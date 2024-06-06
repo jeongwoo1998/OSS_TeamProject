@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify, Response
 import json
 import sys
 
-sys.path.append(os.path.abspath('Food recognition'))
+sys.path.append(os.path.abspath('FoodRecognition'))
 
 # Import the food quantity and recognition models
 from quantity_est.food_quantity_model import quantity
