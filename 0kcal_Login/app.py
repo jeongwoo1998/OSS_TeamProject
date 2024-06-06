@@ -1,8 +1,4 @@
 import os
-
-# 개발 환경에서 HTTP를 허용하도록 설정
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-
 from flask import Flask
 from controller import bp as main_bp
 
@@ -18,7 +14,4 @@ app.register_blueprint(main_bp, url_prefix='/')
 if __name__ == '__main__':
     app.run(debug=True)
 
-app.register_blueprint(main_bp, url_prefix='/')
 
-if __name__ == '__main__':
-    app.run(debug=True)

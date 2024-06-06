@@ -94,43 +94,6 @@ class Kakao_Oauth:
             data={}
         ).json()
 
-# 권장 칼로리 계산 함수
-def calculate_recommended_calories(weight, height, age, sex, activity_level):
-    if sex == 'male':
-        bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
-    else:
-        bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
-
-    activity_multiplier = {
-        'sedentary': 1.2,
-        'lightly_active': 1.375,
-        'moderately_active': 1.55,
-        'very_active': 1.725,
-        'extra_active': 1.9
-    }
-    
-    return bmr * activity_multiplier[activity_level]
-
-# 매크로 영양소 목표 계산 함수
-def calculate_macro_goals(calories):
-    carbs_ratio = 0.55
-    protein_ratio = 0.20
-    fat_ratio = 0.25
-
-    carbs = (calories * carbs_ratio) / 4  # 1g of carbs = 4 kcal
-    protein = (calories * protein_ratio) / 4  # 1g of protein = 4 kcal
-    fat = (calories * fat_ratio) / 9  # 1g of fat = 9 kcal
-
-    return {
-        "calories": calories,
-        "carbs": int(carbs),
-        "protein": int(protein),
-        "fat": int(fat)
-    }
-# 홈페이지 라우트
-@bp.route('/')
-def index():
-    return render_template('index.html')
 # 구글 로그인 라우트
 @bp.route('/login')
 def login():
@@ -259,7 +222,8 @@ def login_kakao_callback():
       
         return redirect(url_for('main.profile', token=jwt_token))
     except Exception as e:
-        return jsonify({'message': 'Kakao callback processing failed', 'error': str(e)}), 500
+        return jsonify({'message': 'Kakao callback processing failed', 'error': str(e)}), 500   
+# 파이어베이스 등록 시 해당 정보들  입력한 후에 등록 함으로 프로필은 남겨둠
 # 프로필 페이지 라우트
 @bp.route('/profile')
 def profile():
