@@ -6,7 +6,7 @@ export default function LoginScreen({ navigation }) {
     <View style={styles.container}> 
       <Image source={require('../assets/dummy.png')} style={styles.image} resizeMode="contain" />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('KakaoLogin')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Kakao')}>
           <Image source={require('../assets/kakaoLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('UserInfo')}>
