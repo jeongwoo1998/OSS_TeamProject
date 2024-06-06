@@ -45,12 +45,14 @@ export default function SecondPage({ navigation }) {
       {/* 성별 선택 */}
       <View style={styles.row}>
         <Text style={styles.label}>성별</Text>
+        {/* 성별을 남성으로 선택했을 경우 */}
         <TouchableOpacity 
           style={[styles.genderButton, genderVal === 'male' && styles.selectedButton]}
           onPress={() => setGenderVal('male')}
         >
           <Text style={[styles.buttonText, genderVal === 'male' && styles.selectedButtonText]}>남</Text>
         </TouchableOpacity>
+        {/* 성별을 여성으로 선택했을 경우 */}
         <TouchableOpacity 
           style={[styles.genderButton, genderVal === 'female' && styles.selectedButton]}
           onPress={() => setGenderVal('female')}
