@@ -2,9 +2,9 @@ import openai
 import json
 
 # OpenAI API KEY 설정
-openai.api_key = 'YOUR_API_KEY'
+openai.api_key = 'sk-my-service-account-HMaXTU2vcOz0MLxwLJEAT3BlbkFJByQH6HdnZA81MGAqBXBN'
 
-def food_recommendations(remaining_nutrients):
+def food_recommendations(remaining_intake):
     def get_completion(prompt, model="gpt-3.5-turbo"):
         response = openai.ChatCompletion.create(
             model=model,
@@ -19,7 +19,7 @@ def food_recommendations(remaining_nutrients):
     # Prompt 작성
     prompt = f"""
     목표 섭취량까지 남은 영양 정보는 다음과 같습니다:
-    {remaining_nutrients}
+    {remaining_intake}
 
     이 정보를 바탕으로 부족한 영양소를 채울 수 있는 적절한 음식을 JSON 형식으로 3가지 추천해주세요.
 
@@ -49,15 +49,3 @@ def food_recommendations(remaining_nutrients):
         return recommended_foods
     except json.JSONDecodeError:
         return f"Failed to parse JSON: {recommendation}"
-
-# example data
-remaining_nutrients = {
-    'calories': 1000,
-    'carbs': 200,
-    'protein': 36,
-    'fat': 25
-}
-
-recommended_foods = food_recommendations(remaining_nutrients)
-print("Recommended foods:")
-print(recommended_foods)
