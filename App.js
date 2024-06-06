@@ -7,10 +7,17 @@ import NutritionStatsScreen from './screens/NutritionStatsScreen';
 import GoalSettingScreen from './screens/GoalSettingScreen';
 import NutritionInfoScreen from './screens/NutritionInfoScreen';
 import RestaurantRecommendationScreen from './screens/RestaurantRecommendationScreen';
+import LoginScreen from './LoginScreen';
+import UserInfo from './UserInfo';
+import DummyPage from './DummyPage';
+import KakaoLogin from './KakaoLogin';
 
 const Stack = createStackNavigator();
 
 const screens = [
+  { name: 'Login', component: LoginScreen }, // 로그인 화면
+  { name: 'Kakao', component: KakaoLogin }, // 카카오 로그인 연동 화면
+  { name: 'UserInfo', component: HomeScreen }, // 로그인 시 회원정보 입력 화면
   { name: 'Home', component: HomeScreen }, // 메인 화면
   { name: 'NutritionStats', component: NutritionStatsScreen }, // 영양 통계 화면
   { name: 'GoalSetting', component: GoalSettingScreen }, // 목표 섭취량 설정 화면
@@ -21,7 +28,7 @@ const screens = [
 const App = () => (
   <PaperProvider>
     <NavigationContainer> 
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         {screens.map(({ name, component }) => (
           <Stack.Screen key={name} name={name} component={component} />
         ))}
