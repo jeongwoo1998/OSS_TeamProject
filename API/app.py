@@ -5,11 +5,9 @@ from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_jwt_extended import JWTManager
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'Firebase'))
-sys.path.append(os.path.join(os.path.dirname(__file__), 'Food recognition'))
-
-from firebase import firebase_BP
-from foodRecognition import foodRecognition_BP
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from Firebase.firebase import firebase_BP
+from FoodRecognition.foodRecognition import foodRecognition_BP
 
 app = Flask(__name__)
 CORS(app)

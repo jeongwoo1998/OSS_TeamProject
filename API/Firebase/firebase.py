@@ -1,8 +1,12 @@
-import os
 from flask import Flask, Blueprint, request, jsonify
 import firebase_admin
 from firebase_admin import credentials, db, storage
 from flask_jwt_extended import create_access_token, jwt_required
+
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from chatGPT.chatGPT import food_recommendations
 
 app = Flask(__name__)
 firebase_BP = Blueprint('firebase', __name__)
@@ -250,6 +254,10 @@ def update_remaining_intake(user_id, date):
             remaining_intake_ref = db.reference(f'/users/{user_id}/date/{date}/remaining_intake')
             remaining_intake_ref.set(remaining_intake)
 
+            recommended_foods = food_recommendations(remaining_intake)
+            food_recommendation_ref = db.reference(f'/users/{user_id}/date/{date}/food_recommendations')
+            food_recommendation_ref.set(recommended_foods)
+
 def update_remaining_intake_for_all_dates(user_id):
     dates_ref = db.reference(f'/users/{user_id}/date')
     dates = dates_ref.get()
@@ -353,3 +361,15 @@ def GetRemainingIntake(user_id, date):
         return jsonify({'error': 'Remaining intake data not found'}), 404
     
     return jsonify(remaining_intake), 200
+
+# Get Food Recommendations Data
+@firebase_BP.route('/GetFoodRecommendations/<user_id>/<date>', methods=['GET'])
+@jwt_required()
+def GetFoodRecommendations(user_id, date):
+    ref = db.reference(f'/users/{user_id}/date/{date}/food_recommendations')
+    food_recommendations = ref.get()
+    
+    if not food_recommendations:
+        return jsonify({'error': 'Food recommendations not found'}), 404
+    
+    return jsonify(food_recommendations), 200
