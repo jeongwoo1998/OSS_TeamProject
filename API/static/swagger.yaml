@@ -33,10 +33,10 @@ paths:
             schema:
               type: object
               properties:
-                username:
+                user_id:
                   type: string
                   example: test
-                password:
+                user_pwd:
                   type: string
                   example: test
       responses:
@@ -51,7 +51,7 @@ paths:
                     type: string
                     example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
         '401':
-          description: Bad username or password
+          description: Bad user_id or user_pwd
           content:
             application/json:
               schema:
@@ -59,7 +59,7 @@ paths:
                 properties:
                   error:
                     type: string
-                    example: Bad username or password
+                    example: Bad user_id or user_pwd
                     
   /UploadImage:
     post:
@@ -86,7 +86,7 @@ paths:
                 properties:
                   image_url:
                     type: string
-                    example: "https://storage.googleapis.com/your-bucket-name/image.jpg"
+                    example: "./image.jpg"
         400:
           description: Missing image file
           content:
@@ -97,21 +97,22 @@ paths:
                   error:
                     type: string
                     example: "Missing image file"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
+
   /SetUserID:
     post:
       summary: 사용자 아이디 저장
       tags:
         - User Database
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user_id:
-                  type: string
-                  example: user_id_1
       responses:
         200:
           description: Success
@@ -123,16 +124,16 @@ paths:
                   success:
                     type: boolean
                     example: true
-        400:
-          description: Missing data
+        401:
+          description: Unauthorized
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  msg:
                     type: string
-                    example: Missing user_id
+                    example: Missing Authorization Header
 
   /SetUserInfo:
     post:
@@ -146,9 +147,6 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
-                  type: string
-                  example: user_id_1
                 user_info:
                   type: object
                   properties:
@@ -182,6 +180,16 @@ paths:
                   error:
                     type: string
                     example: Missing data
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
   /SetIntakeGoal:
     post:
@@ -195,9 +203,6 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
-                  type: string
-                  example: user_id_1
                 intake_goal:
                   type: object
                   properties:
@@ -234,46 +239,16 @@ paths:
                   error:
                     type: string
                     example: Missing data
-
-  /SetDate:
-    post:
-      summary: 사용자 날짜 저장
-      tags:
-        - User Database
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user_id:
-                  type: string
-                  example: user_id_1
-                date:
-                  type: string
-                  example: 2024-05-26
-      responses:
-        200:
-          description: Success
+        401:
+          description: Unauthorized
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  success:
-                    type: boolean
-                    example: true
-        400:
-          description: Missing data
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
+                  msg:
                     type: string
-                    example: Missing data
+                    example: Missing Authorization Header
 
   /SetBreakfastData:
     post:
@@ -287,9 +262,6 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
-                  type: string
-                  example: user_id_1
                 date:
                   type: string
                   example: 2024-05-26
@@ -335,6 +307,16 @@ paths:
                   error:
                     type: string
                     example: Missing data
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
   /SetLunchData:
     post:
@@ -348,9 +330,6 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
-                  type: string
-                  example: user_id_1
                 date:
                   type: string
                   example: 2024-05-26
@@ -396,6 +375,16 @@ paths:
                   error:
                     type: string
                     example: Missing data
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
   /SetDinnerData:
     post:
@@ -409,9 +398,6 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
-                  type: string
-                  example: user_id_1
                 date:
                   type: string
                   example: 2024-05-26
@@ -457,6 +443,16 @@ paths:
                   error:
                     type: string
                     example: Missing data
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
   /SetTotalData:
     post:
@@ -470,9 +466,6 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
-                  type: string
-                  example: user_id_1
                 date:
                   type: string
                   example: 2024-05-26
@@ -512,18 +505,22 @@ paths:
                   error:
                     type: string
                     example: Missing data
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
-  /GetUserInfo/{user_id}:
+  /GetUserInfo:
     get:
       summary: 사용자 정보
       tags:
         - User Database
-      parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         200:
           description: Success
@@ -551,18 +548,22 @@ paths:
                   error:
                     type: string
                     example: User info not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
-  /GetIntakeGoal/{user_id}:
+  /GetIntakeGoal:
     get:
       summary: 사용자 목표 섭취량
       tags:
         - User Database
-      parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         200:
           description: Success
@@ -593,18 +594,23 @@ paths:
                   error:
                     type: string
                     example: Intake goal not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
-  /GetDateData/{user_id}/{date}:
+  /GetDateData/{date}:
     get:
       summary: 사용자 날짜 정보
       tags:
         - User Database
       parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
         - name: date
           in: path
           required: true
@@ -673,7 +679,7 @@ paths:
                       calories:
                         type: number
                         example: 600
-                      carb:
+                      carbs:
                         type: number
                         example: 40
                       protein:
@@ -722,18 +728,23 @@ paths:
                   error:
                     type: string
                     example: Date data not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
-  /GetBreakfastData/{user_id}/{date}:
+  /GetBreakfastData/{date}:
     get:
       summary: 사용자 아침 식사 정보
       tags:
         - User Database
       parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
         - name: date
           in: path
           required: true
@@ -776,18 +787,23 @@ paths:
                   error:
                     type: string
                     example: Breakfast data not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
-  /GetLunchData/{user_id}/{date}:
+  /GetLunchData/{date}:
     get:
       summary: 사용자 점심 식사 정보
       tags:
         - User Database
       parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
         - name: date
           in: path
           required: true
@@ -830,18 +846,23 @@ paths:
                   error:
                     type: string
                     example: Lunch data not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
-  /GetDinnerData/{user_id}/{date}:
+  /GetDinnerData/{date}:
     get:
       summary: 사용자 저녁 식사 정보
       tags:
         - User Database
       parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
         - name: date
           in: path
           required: true
@@ -884,18 +905,23 @@ paths:
                   error:
                     type: string
                     example: Dinner data not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
-  /GetTotalData/{user_id}/{date}:
+  /GetTotalData/{date}:
     get:
       summary: 사용자 하루 식사 정보
       tags:
         - User Database
       parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
         - name: date
           in: path
           required: true
@@ -932,18 +958,23 @@ paths:
                   error:
                     type: string
                     example: Total data not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
-  /GetRemainingIntake/{user_id}/{date}:
+  /GetRemainingIntake/{date}:
     get:
       summary: 사용자 남은 목표 섭취량
       tags:
         - User Database
       parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
         - name: date
           in: path
           required: true
@@ -980,6 +1011,16 @@ paths:
                   error:
                     type: string
                     example: Remaining intake data not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
   /quantity:
     post:  
@@ -1099,17 +1140,12 @@ paths:
                     type: string
                     example: An error occurred
 
-  /GetFoodRecommendations/{user_id}/{date}:
+  /GetFoodRecommendations/{date}:
     get:
       summary: 음식 추천 정보
       tags:
         - User Database
       parameters:
-        - name: user_id
-          in: path
-          required: true
-          schema:
-            type: string
         - name: date
           in: path
           required: true
@@ -1140,6 +1176,16 @@ paths:
                   error:
                     type: string
                     example: Food recommendations not found
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Missing Authorization Header
 
   /test:
     get:
