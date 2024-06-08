@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, request, jsonify
 import firebase_admin
 from firebase_admin import credentials, db, storage
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 import sys
 import os
@@ -23,17 +23,17 @@ firebase_admin.initialize_app(cred, {
 # JWT Example
 @firebase_BP.route('/UserLogin', methods=['POST'])
 def UserLogin():
-    username = request.json.get('username', None)
-    password = request.json.get('password', None)
+    user_id = request.json.get('user_id', None)
+    user_pwd = request.json.get('user_pwd', None)
 
     '''
     Here you should add login logic
     '''
  
-    if username != 'test' or password != 'test':  # Example validation
-        return jsonify({"error": "Bad username or password"}), 401
+    if user_id != 'test' or user_pwd != 'test':  # Example validation
+        return jsonify({"error": "Bad user_id or user_pwd"}), 401
 
-    access_token = create_access_token(identity = username)
+    access_token = create_access_token(identity = user_id)
     return jsonify(access_token=access_token), 200
 
 # Upload Image
@@ -60,14 +60,9 @@ def UploadImage():
 @firebase_BP.route('/SetUserID', methods=['POST'])
 @jwt_required()
 def SetUserID():
-    data = request.json
-    user_id = data.get('user_id')
-    
-    if not user_id:
-        return jsonify({'error': 'Missing user_id'}), 400
-    
-    ref = db.reference(f'/users/{user_id}')
-    ref.set({'user_id': user_id})
+    user_id = get_jwt_identity()
+    ref = db.reference(f'/users')
+    ref.set(user_id)
     
     return jsonify({'success': True}), 200
 
@@ -76,10 +71,10 @@ def SetUserID():
 @jwt_required()
 def SetUserInfo():
     data = request.json
-    user_id = data.get('user_id')
+    user_id = get_jwt_identity()
     user_info = data.get('user_info')
     
-    if not user_id or not user_info:
+    if not user_info:
         return jsonify({'error': 'Missing data'}), 400
     
     ref = db.reference(f'/users/{user_id}/user_info')
@@ -92,7 +87,7 @@ def SetUserInfo():
 @jwt_required()
 def SetIntakeGoal():
     data = request.json
-    user_id = data.get('user_id')
+    user_id = get_jwt_identity()
     intake_goal = data.get('intake_goal')
     
     if not user_id or not intake_goal:
@@ -105,33 +100,16 @@ def SetIntakeGoal():
 
     return jsonify({'success': True}), 200
 
-# Set Date data
-@firebase_BP.route('/SetDate', methods=['POST'])
-@jwt_required()
-def SetDate():
-    data = request.json
-    user_id = data.get('user_id')
-    date = data.get('date')
-    date_data = data.get('date_data')
-    
-    if not user_id or not date or not date_data:
-        return jsonify({'error': 'Missing data'}), 400
-    
-    ref = db.reference(f'/users/{user_id}/date/{date}')
-    ref.set(date_data)
-    
-    return jsonify({'success': True}), 200
-
 # Set Breakfast Data
 @firebase_BP.route('/SetBreakfastData', methods=['POST'])
 @jwt_required()
 def SetBreakfastData():
     data = request.json
-    user_id = data.get('user_id')
+    user_id = get_jwt_identity()
     date = data.get('date')
     breakfast_data = data.get('breakfast_data')
     
-    if not user_id or not date or not breakfast_data:
+    if not date or not breakfast_data:
         return jsonify({'error': 'Missing data'}), 400
     
     ref = db.reference(f'/users/{user_id}/date/{date}/breakfast')
@@ -146,11 +124,11 @@ def SetBreakfastData():
 @jwt_required()
 def SetLunchData():
     data = request.json
-    user_id = data.get('user_id')
+    user_id = get_jwt_identity()
     date = data.get('date')
     lunch_data = data.get('lunch_data')
     
-    if not user_id or not date or not lunch_data:
+    if not date or not lunch_data:
         return jsonify({'error': 'Missing data'}), 400
     
     ref = db.reference(f'/users/{user_id}/date/{date}/lunch')
@@ -165,11 +143,11 @@ def SetLunchData():
 @jwt_required()
 def SetDinnerData():
     data = request.json
-    user_id = data.get('user_id')
+    user_id = get_jwt_identity()
     date = data.get('date')
     dinner_data = data.get('dinner_data')
     
-    if not user_id or not date or not dinner_data:
+    if not date or not dinner_data:
         return jsonify({'error': 'Missing data'}), 400
     
     ref = db.reference(f'/users/{user_id}/date/{date}/dinner')
@@ -184,11 +162,11 @@ def SetDinnerData():
 @jwt_required()
 def SetTotalData():
     data = request.json
-    user_id = data.get('user_id')
+    user_id = get_jwt_identity()
     date = data.get('date')
     total_data = data.get('total_data')
     
-    if not user_id or not date or not total_data:
+    if not date or not total_data:
         return jsonify({'error': 'Missing data'}), 400
     
     ref = db.reference(f'/users/{user_id}/date/{date}/total')
@@ -267,9 +245,10 @@ def update_remaining_intake_for_all_dates(user_id):
             update_remaining_intake(user_id, date)
 
 # Get User Info Data
-@firebase_BP.route('/GetUserInfo/<user_id>', methods=['GET'])
+@firebase_BP.route('/GetUserInfo', methods=['GET'])
 @jwt_required()
-def GetUserInfo(user_id):
+def GetUserInfo():
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/user_info')
     user_info = ref.get()
     
@@ -279,9 +258,10 @@ def GetUserInfo(user_id):
     return jsonify(user_info), 200
 
 # Get Intake Goal Data
-@firebase_BP.route('/GetIntakeGoal/<user_id>', methods=['GET'])
+@firebase_BP.route('/GetIntakeGoal', methods=['GET'])
 @jwt_required()
-def GetIntakeGoal(user_id):
+def GetIntakeGoal():
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/intake_goal')
     intake_goal = ref.get()
     
@@ -291,9 +271,10 @@ def GetIntakeGoal(user_id):
     return jsonify(intake_goal), 200
 
 # Get Date Data
-@firebase_BP.route('/GetDateData/<user_id>/<date>', methods=['GET'])
+@firebase_BP.route('/GetDateData/<date>', methods=['GET'])
 @jwt_required()
-def GetDateData(user_id, date):
+def GetDateData(date):
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/date/{date}')
     date_data = ref.get()
     
@@ -303,9 +284,10 @@ def GetDateData(user_id, date):
     return jsonify(date_data), 200
 
 # Get Breakfast Data
-@firebase_BP.route('/GetBreakfastData/<user_id>/<date>', methods=['GET'])
+@firebase_BP.route('/GetBreakfastData/<date>', methods=['GET'])
 @jwt_required()
-def GetBreakfastData(user_id, date):
+def GetBreakfastData(date):
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/date/{date}/breakfast')
     breakfast_data = ref.get()
     
@@ -315,9 +297,10 @@ def GetBreakfastData(user_id, date):
     return jsonify(breakfast_data), 200
 
 # Get Lunch Data
-@firebase_BP.route('/GetLunchData/<user_id>/<date>', methods=['GET'])
+@firebase_BP.route('/GetLunchData/<date>', methods=['GET'])
 @jwt_required()
-def GetLunchData(user_id, date):
+def GetLunchData(date):
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/date/{date}/lunch')
     lunch_data = ref.get()
     
@@ -327,9 +310,10 @@ def GetLunchData(user_id, date):
     return jsonify(lunch_data), 200
 
 # Get Dinner Data
-@firebase_BP.route('/GetDinnerData/<user_id>/<date>', methods=['GET'])
+@firebase_BP.route('/GetDinnerData/<date>', methods=['GET'])
 @jwt_required()
-def GetDinnerData(user_id, date):
+def GetDinnerData(date):
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/date/{date}/dinner')
     dinner_data = ref.get()
     
@@ -339,9 +323,10 @@ def GetDinnerData(user_id, date):
     return jsonify(dinner_data), 200
 
 # Get Total Data
-@firebase_BP.route('/GetTotalData/<user_id>/<date>', methods=['GET'])
+@firebase_BP.route('/GetTotalData/<date>', methods=['GET'])
 @jwt_required()
-def GetTotalData(user_id, date):
+def GetTotalData(date):
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/date/{date}/total')
     total_data = ref.get()
     
@@ -351,9 +336,10 @@ def GetTotalData(user_id, date):
     return jsonify(total_data), 200
 
 # Get Remaining Intake Data
-@firebase_BP.route('/GetRemainingIntake/<user_id>/<date>', methods=['GET'])
+@firebase_BP.route('/GetRemainingIntake/<date>', methods=['GET'])
 @jwt_required()
-def GetRemainingIntake(user_id, date):
+def GetRemainingIntake(date):
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/date/{date}/remaining_intake')
     remaining_intake = ref.get()
     
@@ -363,9 +349,10 @@ def GetRemainingIntake(user_id, date):
     return jsonify(remaining_intake), 200
 
 # Get Food Recommendations Data
-@firebase_BP.route('/GetFoodRecommendations/<user_id>/<date>', methods=['GET'])
+@firebase_BP.route('/GetFoodRecommendations/<date>', methods=['GET'])
 @jwt_required()
-def GetFoodRecommendations(user_id, date):
+def GetFoodRecommendations(date):
+    user_id = get_jwt_identity()
     ref = db.reference(f'/users/{user_id}/date/{date}/food_recommendations')
     food_recommendations = ref.get()
     
