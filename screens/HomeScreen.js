@@ -66,6 +66,7 @@ const HomeScreen = ({ navigation }) => {
     };
     fetchMealImages();
   }, []);
+  
 
   return (
     // Header + Menu 화면 표시
@@ -124,7 +125,6 @@ const HomeScreen = ({ navigation }) => {
           onImagePick={handleImagePick}
         />
       </View>
-
 
     </SafeAreaView>
   );
