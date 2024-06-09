@@ -28,12 +28,12 @@ export default function KakaoLogin({ navigation }) {
           style={styles.loading}
         />
       )}
-      <WebView    // uri 속성으로 Kakao OAuth 인증 페이지 로드
-        source={{ uri: 'https://kauth.kakao.com/oauth/authorize?client_id=06535f3e8b613de6bf04036d2fe1f580&redirect_uri=http://192.168.0.7:8081&response_type=code' }}
+        <WebView        // uri 속성으로 Google OAuth 인증 페이지 로드
+        source={{ uri: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_GOOGLE_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email%20profile' }}
         onNavigationStateChange={handleWebViewNavigationStateChange}
-        onLoadEnd={() => setLoading(false)}   // 로딩이 끝나면 로딩 화면 사라짐
-        startInLoadingState={true}    // 로딩 시작되면 다시 로딩 화면 생김
-      />
+        onLoadEnd={() => setLoading(false)}     // 로딩이 끝나면 로딩 화면 사라짐
+        startInLoadingState={true}       // 로딩 시작되면 다시 로딩 화면 생김
+        />
     </View>
   );
 }

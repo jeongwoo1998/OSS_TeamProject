@@ -9,10 +9,7 @@ export default function LoginScreen({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Kakao')}>
           <Image source={require('../assets/kakaoLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('UserInfo')}>
-          <Image source={require('../assets/naverLogin.png')} style={styles.buttonImage} resizeMode="contain" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('UserInfo')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Google')}>  
           <Image source={require('../assets/googleLogin.png')} style={styles.buttonImage} resizeMode="contain" />
         </TouchableOpacity>
         </View>
