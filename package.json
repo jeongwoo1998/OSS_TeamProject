@@ -2,14 +2,19 @@
   "name": "0kcal_design",
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
+  "proxy": "http://127.0.0.1:8081",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
+    "dev":"HOST=0.0.0.0 expo",
     "web": "expo start --web"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
+    "@react-native-firebase/app": "^20.1.0",
+    "@react-native-firebase/auth": "^20.1.0",
+    "@react-native-firebase/firestore": "^20.1.0",
     "@react-native-google-signin/google-signin": "^12.2.0",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
