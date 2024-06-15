@@ -11,10 +11,22 @@ from chatGPT.chatGPT import food_recommendations
 app = Flask(__name__)
 firebase_BP = Blueprint('firebase', __name__)
 
-service_account_key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+service_account_key = {
+  "type": "",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": "",
+  "universe_domain": ""
+}
 
 # Firebase 관리자 SDK 초기화
-cred = credentials.Certificate(service_account_key_path)
+cred = credentials.Certificate(service_account_key)
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://oss-teamproject-default-rtdb.firebaseio.com/',
     'storageBucket': 'oss-teamproject.appspot.com'
@@ -201,11 +213,12 @@ def update_total_data(user_id, date):
     
     # Calculate total intake
     total_data = {
-        'calories': breakfast_data['calories'] + lunch_data['calories'] + dinner_data['calories'],
-        'protein': breakfast_data['protein'] + lunch_data['protein'] + dinner_data['protein'],
-        'carbs': breakfast_data['carbs'] + lunch_data['carbs'] + dinner_data['carbs'],
-        'fat': breakfast_data['fat'] + lunch_data['fat'] + dinner_data['fat']
+        'calories': round(breakfast_data['calories'] + lunch_data['calories'] + dinner_data['calories'], 1),
+        'protein': round(breakfast_data['protein'] + lunch_data['protein'] + dinner_data['protein'], 1),
+        'carbs': round(breakfast_data['carbs'] + lunch_data['carbs'] + dinner_data['carbs'], 1),
+        'fat': round(breakfast_data['fat'] + lunch_data['fat'] + dinner_data['fat'], 1)
     }
+
     
     # Set total data
     total_ref = db.reference(f'/users/{user_id}/date/{date}/total')
