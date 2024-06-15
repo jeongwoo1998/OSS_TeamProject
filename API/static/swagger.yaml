@@ -60,7 +60,7 @@ paths:
                   error:
                     type: string
                     example: Bad user_id or user_pwd
-                    
+
   /UploadImage:
     post:
       summary: 이미지 업로드
@@ -73,7 +73,7 @@ paths:
             schema:
               type: object
               properties:
-                Image:
+                image:
                   type: string
                   format: binary
       responses:
@@ -1104,21 +1104,21 @@ paths:
                       description: Name of food
                       example: Apple
                     calories:
-                      type: string
+                      type: float
                       description: Calories
-                      example: 52.00 kcal
+                      example: 52.0
                     carbs:
-                      type: string
+                      type: float
                       description: Carbs
-                      example: 14.00 g
+                      example: 14.0
                     protein:
-                      type: string
+                      type: float
                       description: Protein
-                      example: 0.30 g
+                      example: 0.3
                     fat:
-                      type: string
+                      type: float
                       description: Fat
-                      example: 0.20 g
+                      example: 0.2
         '400':
           description: 잘못된 입력
           content:
@@ -1186,6 +1186,83 @@ paths:
                   msg:
                     type: string
                     example: Missing Authorization Header
+
+  /searchKeyword:
+    get:
+      summary: 키워드 검색 (지도)
+      tags:
+        - Search
+      security: []
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: string
+            example: restaurant
+        - name: latitude
+          in: query
+          required: true
+          schema:
+            type: string
+            example: 37.5666791
+        - name: longitude
+          in: query
+          required: true
+          schema:
+            type: string
+            example: 126.9782914
+        - name: radius
+          in: query
+          required: true
+          schema:
+            type: string
+            example: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "123456"
+                    place_name:
+                      type: string
+                      example: "Restaurant Name"
+                    address_name:
+                      type: string
+                      example: "123 Main St"
+                    y:
+                      type: string
+                      example: "37.5666791"
+                    x:
+                      type: string
+                      example: "126.9782914"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Missing required parameters
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: An error occurred
 
   /test:
     get:
