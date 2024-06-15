@@ -60,8 +60,8 @@ def kakao_token():
         profile_json = profile_response.json()
 
         jwt_access_token = create_access_token(identity=profile_json['id'])
-        print(jwt_access_token)
-        # Return JWT token as HTML response
+        print(f"JWT: {jwt_access_token}")
+
         html_response = f"""
         <html>
             <body>
@@ -120,7 +120,8 @@ def google_callback():
         profile_json = profile_response.json()
 
         jwt_access_token = create_access_token(identity=profile_json['id'])
-        print(jwt_access_token)
+        print(f"JWT: {jwt_access_token}")
+
         html_response = f"""
         <html>
             <body>
