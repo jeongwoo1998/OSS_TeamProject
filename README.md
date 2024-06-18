@@ -118,7 +118,10 @@ _**Swagger :**_ **`localhost:5000/swagger`**
 * * *
 
 ### ⚙ 설정
-1. **`Android Emulator`** 를 실행시킵니다.
+1. **`Android Studio`** 를 설치합니다. <br><br>
+2. **`Android Emulator`** 를 실행시킵니다. <br><br>
+3. **`Android Emulator`** 의 **`Location`** 을 현재 위치로 바꿔줍니다. <br><br>
+4. **`Image`** 폴더 안의 사진들을 **`Android Emulator`** 에 넣어줍니다.<br><br>
 
 ### 🚀 실행
 1. **`Expo`** 를 실행시킨 **`Front-end`** 터미널로 돌아옵니다. <br><br>
