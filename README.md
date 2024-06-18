@@ -11,7 +11,7 @@ _2024학년도 1학기 전북대학교 **OSS 팀 프로젝트**_
 ### ✅ 팀 구성
 |이름|담당|역할|
 |---|---|---|
-|이정우|**`Front-end`**|`팀장` `문서 작업` `UI 총괄`|
+|이정우|**`Front-end`**|`팀장` `문서 작업` `UI 디자인` `Front-end 총괄`|
 |이민혁|**`Front-end`**|`UI 디자인`|
 |장정우|**`Back-end`**|`음식 인식 모델(AI)` `API 구축` `데이터베이스 구축`<br> `코드 연동 (Front + Back)` `GIT 버전 관리` `Notion 문서정리`|
 |조훈희|**`Back-end`**|`데이터베이스 구축` `로그인 기능`|
@@ -33,7 +33,7 @@ _2024학년도 1학기 전북대학교 **OSS 팀 프로젝트**_
 
 ✔ **`Tool`**
 
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"><img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
 <br><br>
 
 ### ✅ 개요
@@ -84,7 +84,8 @@ _4. 사용자의 식단에서 부족한 **영양 성분**을 기반으로 **음�
 * * *
 
 ### 🚀 실행
-1. **`npx expo start`** 를 터미널 창에 입력하여 **`Expo`** 를 실행시킵니다.
+1. **`node.js`** 를 설치합니다.
+2. **`npx expo start`** 를 터미널 창에 입력하여 **`Expo`** 를 실행시킵니다.
 <br><br>
 
 ### 🧑🏼‍🍳 Back-end
@@ -128,3 +129,20 @@ _**Swagger :**_ **`localhost:5000/swagger`**
 ### 🚀 실행
 1. **`Expo`** 를 실행시킨 **`Front-end`** 터미널로 돌아옵니다. <br><br>
 2. **`Front-end`** 터미널에서 **`a`** 키를 눌러 **`Android Emulator`** 를 통해 어플을 실행합니다.
+<br><br>
+
+### 🔑 필수 설정
+* * *
+
+1. **`Notion`** 에 정리되어 있는  **`API KEY`** 참고하여 파일에 넣습니다.
+<br><br>
+
+### ⚠ 주의 사항
+* * *
+
+**`Google Login`**
+1. **`ngrok`** 설치 후 터미널에서 실행합니다. <br><br>
+2. **`ngrok http 5000`** 입력 후 나온 주소를 확인합니다.<br><br>
+3. **`Google Cloud Console`** 에 접속합니다. <br><br> 
+4. **`Google Client ID` `Google Client Secret` `Google Redirect URI`** 를 설정합니다. <br><br>
+5. **`Back-end/Login/login.py` `Front-end/screens/GoogleLogin.js`** 의 코드를 알맞게 수정합니다.
