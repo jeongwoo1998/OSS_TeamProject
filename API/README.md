@@ -1,4 +1,4 @@
-### 🧑🏼‍🍳 API 사용법 
+### 🧑🏼‍🍳 사용 방법 
 * * *
 
 ### 🔗 Google Drive에서 음식 분류 및 양 추정 모델 다운로드
@@ -14,7 +14,7 @@
 2. **`quantity_est.zip`** 파일을 압축 해제합니다. <br><br>
 
 ### 🪄 파일 정리
-1. 압축 해제한 파일들을 **`Food recognition`** 폴더에 위치시킵니다. <br><br>
+1. 압축 해제한 파일들을 **`Back-end/FoodRecognition`** 폴더에 위치시킵니다. <br><br>
 2. **`pip install -r requirements.txt`** <br><br>
 
 ### 🚀 실행
