@@ -13,7 +13,7 @@ _2024학년도 1학기 전북대학교 **OSS 팀 프로젝트**_
 |---|---|---|
 |이정우|**`Front-end`**|`팀장` `문서 작업` `UI 총괄`|
 |이민혁|**`Front-end`**|`UI 디자인`|
-|장정우|**`Back-end`**|`음식 인식 모델(AI)` `데이터베이스 구축` `코드 연동 (Front + Back)` `GIT 버전 관리` `Notion 문서정리`|
+|장정우|**`Back-end`**|`음식 인식 모델(AI)` `API 구축` `데이터베이스 구축`<br> `코드 연동 (Front + Back)` `GIT 버전 관리` `Notion 문서정리`|
 |조훈희|**`Back-end`**|`데이터베이스 구축` `로그인 기능`|
 <br>
 
@@ -84,8 +84,7 @@ _4. 사용자의 식단에서 부족한 **영양 성분**을 기반으로 **음�
 * * *
 
 ### 🚀 실행
-1. 새로운 터미널 창을 엽니다.<br><br>
-2. **`npx expo start`** 를 입력하여 **`Expo`** 를 실행시킵니다.
+1. **`npx expo start`** 를 터미널 창에 입력하여 **`Expo`** 를 실행시킵니다.
 <br><br>
 
 ### 🧑🏼‍🍳 Back-end
@@ -105,6 +104,9 @@ _4. 사용자의 식단에서 부족한 **영양 성분**을 기반으로 **음�
 
 ### 🪄 파일 정리
 1. 압축 해제한 파일들을 **`Back-end/FoodRecognition`** 폴더에 위치시킵니다. <br><br>
+
+### 📦 필요한 패키지 설치
+1. **`Back-end/requirements.txt`** 파일을 확인합니다. <br><br>
 2. **`pip install -r requirements.txt`** <br><br>
 
 ### 🚀 실행
@@ -118,7 +120,10 @@ _**Swagger :**_ **`localhost:5000/swagger`**
 * * *
 
 ### ⚙ 설정
-1. **`Android Emulator`** 를 실행시킵니다.
+1. **`Android Studio`** 를 설치합니다. <br><br>
+2. **`Android Emulator`** 를 실행시킵니다. <br><br>
+3. **`Android Emulator`** 의 **`Location`** 을 현재 위치로 바꿔줍니다. <br><br>
+4. **`Image`** 폴더 안의 사진들을 **`Android Emulator`** 에 넣어줍니다.<br><br>
 
 ### 🚀 실행
 1. **`Expo`** 를 실행시킨 **`Front-end`** 터미널로 돌아옵니다. <br><br>
