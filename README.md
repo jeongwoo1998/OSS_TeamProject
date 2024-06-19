@@ -191,6 +191,7 @@ _**Swagger :**_ **`localhost:5000/swagger`**
    - _**`Device Explorer`** 창에서 에뮬레이터의 파일 시스템을 탐색합니다._
    - _**/sdcard** 또는 **/storage/emulated/0** 디렉토리를 찾아서 선택합니다._
    - _**`Pictures`** 폴더를 선택하여 **`Image`** 폴더 안의 사진을 넣습니다._
+   <br><br>
 
 
 ### 🚀 실행
