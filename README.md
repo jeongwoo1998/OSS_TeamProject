@@ -69,7 +69,7 @@
 1. 압축 해제한 파일들을 **`Back-end/FoodRecognition`** 폴더에 위치시킵니다. <br><br>
 
 ### 📦 필요한 패키지 설치
-1. 2. **`Visual Studio`** 에서 **`OSS_Teamproject/Back-end`** 디렉토리로 엽니다.
+1. **`Visual Studio`** 에서 **`OSS_Teamproject/Back-end`** 디렉토리로 엽니다.
 2. **`Back-end/requirements.txt`** 파일을 확인합니다. <br><br>
 2. **`pip install -r requirements.txt`** <br><br>
 
