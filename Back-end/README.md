@@ -1,6 +1,8 @@
 ### 🧑🏼‍🍳 사용 방법 
 * * *
 
+**`VS Code`** 를 통해 **`Back-end`** 폴더를 실행합니다.
+
 ### 🔗 Google Drive에서 음식 인식 및 양 추정 모델 다운로드
 1. Google Drive 다운로드 링크로 이동합니다.  
    - [yolov3](https://drive.google.com/file/d/1DRJElnJSbhlmeyZ85NXpsqBcewgnrbcF/view?usp=sharing)
@@ -21,7 +23,18 @@
 2. **`pip install -r requirements.txt`** <br><br>
 
 ### 🚀 실행
+❗ _실행 전 [🔑 필수 설정](#-필수-설정)을 확인합니다._
 1. **`app.py`** 파일을 실행시킵니다. <br><br>
+
+### ⚠ 오류 발생 시
+**`quantity_est` `yolov3` 인식이 안될 경우** _(원인 ➡ 파일 압축 해제 과정에서 파일 중복)_
+
+- _**`Back-end/FoodRecognition/foodRecognition.py` 코드 아래와 같이 수정**_
+
+```python
+from quantity_est.quantity_est.food_quantity_model import quantity
+from yolov3.yolov3.food_recognition_model import detect, get_nutrients
+```
 
 ### 🌈 _How to use API_
 _**Swagger :**_ **`localhost:5000/swagger`**
