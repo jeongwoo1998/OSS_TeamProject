@@ -2,6 +2,30 @@
 _2024학년도 1학기 전북대학교 **OSS 팀 프로젝트**_
 <br><br>
 
+## 🗣 목차
+
+[🚀 영칼로리](#-영칼로리)
+- [✅ 프로젝트 명](#-프로젝트-명)
+- [✅ 팀 구성](#-팀-구성)
+- [✅ 기술 스택](#-기술-스택)
+- [✅ 개요](#-개요)
+- [✅ 주요 기능](#-주요-기능)
+- [✅ 서비스 구성도](#-서비스-구성도)
+- [✅ 기대 효과](#-기대-효과)
+<br><br>
+
+[💡 실행 방법](#-실행-방법)
+- [📁 폴더 구조](#-폴더-구조)
+- [🧑🏼‍🍳 Front-end](#-front-end)
+- [🧑🏼‍🍳 Back-end](#-back-end)
+- [🧑🏼‍🍳 Android Emulator](#-android-emulator)
+- [🔑 필수 설정](#-필수-설정)
+- [⚠ 주의 사항](#-주의-사항)
+<br><br>
+
+[📄 프로젝트 문서화](#-프로젝트-문서화)
+<br><br>
+
 ## 🚀 영칼로리
 
 ### ✅ 프로젝트 명
@@ -145,4 +169,20 @@ _**Swagger :**_ **`localhost:5000/swagger`**
 2. **`ngrok http 5000`** 입력 후 나온 주소를 확인합니다.<br><br>
 3. **`Google Cloud Console`** 에 접속합니다. <br><br> 
 4. **`Google Client ID` `Google Client Secret` `Google Redirect URI`** 를 설정합니다. <br><br>
-5. **`Back-end/Login/login.py` `Front-end/screens/GoogleLogin.js`** 의 코드를 알맞게 수정합니다.
+5. **`Back-end/Login/login.py` `Front-end/screens/GoogleLogin.js`** 의 코드를 알맞게 수정합니다. <br><br>
+
+## 📄 프로젝트 문서화
+
+1. **`GITHUB`** 
+- [**GITHUB LINK**](https://github.com/jeongwoo1998/OSS_TeamProject)
+<br><br>
+
+2. **`NOTION`** 
+- [**프로젝트 계획서**](https://marsh-holiday-5f0.notion.site/23a1c8e5c66b45c0bd944a1f71df7c31?pvs=4)
+- [**프로젝트 진행 현황**](https://marsh-holiday-5f0.notion.site/03bb32256711439fa02793dcdd6b0eca?pvs=4)
+- [**프로젝트 결과 보고서**](https://marsh-holiday-5f0.notion.site/443115f874134519a6cc42c62d0f4b2f?pvs=4)
+- **API KEY** _(팀스페이스 멤버만 확인 가능)_
+<br><br>
+
+3. **`SWAGGER`**
+- _**Back-end/app.py**_ ➡ **`localhost:5000/swagger`**
