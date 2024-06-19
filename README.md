@@ -31,15 +31,21 @@
 2. **`Visual Studio`** 에서 **`OSS_Teamproject/Front-End`** 디렉토리로 엽니다.
 3. **`npx expo start`** 를 터미널 창에 입력하여 **`Expo`** 를 실행시킵니다.
 <br><br>
+* * *
 
 ### 🧑🏼‍🍳 Android Emulator
 * * *
 
 ### ⚙ 설정
 1. **`Android Studio`** 를 설치합니다. <br><br>
-2. **`Android Emulator`** 를 실행시킵니다. <br><br>
-3. **`Android Emulator`** 의 **`Location`** 을 현재 위치로 바꿔줍니다. <br><br>
-4. **`Image`** 폴더 안의 사진들을 **`Android Emulator`** 에 넣어줍니다.<br>
+2. **`Android Studio`** 를 실행하고 **`No Activity`** 를 선택합니다. <br><br>
+3. **`Android Studio`** 우측의 **`Device Manager`** 를 선택합니다. <br><br>
+4. **`Device Manager`** 의 + 버튼을 누르고 Create Virtual Device를 선택합니다. <br><br>
+5. **`Pixel ?`** 를 고르고 R 버전을 선택합니다. <br><br>
+6. **`Finish`** 를 눌러 **`Android Emulator`** 구성을 완료 합니다. <br><br>  
+7. **`Android Emulator`** 를 실행시킵니다. <br><br>
+8. **`Android Emulator`** 의 **`Location`** 을 현재 위치로 바꿔줍니다. <br><br>
+9. **`Image`** 폴더 안의 사진들을 **`Android Emulator`** 에 넣어줍니다.<br>
  - Android Studio에서 "View" > "Tool Windows" > "Device Explorer"를 선택합니다.<br>
  - Device Explorer 창에서 에뮬레이터의 파일 시스템을 탐색합니다.<br>
  - /sdcard 또는 /storage/emulated/0 디렉토리를 찾아서 선택합니다.<br>
