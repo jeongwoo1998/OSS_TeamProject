@@ -1,74 +1,84 @@
-# OSS Team Project
-2024학년도 1학기 전북대학교 **OSS 팀 프로젝트**
+## 💡 실행 방법
+
+### 📁 폴더 구조
+
+```bash
+├── 📁 Front-end
+│   │
+│   └── ...
+│
+├── 📁 Back-end
+│   │
+│   └── ...
+│   
+├── 📁 Image
+│   
+└── 📁 ...
+```
+
+### 🧑🏼‍🍳 Front-end
+* * *
+
+### 🚀 실행
+1. **`node.js`** 를 설치합니다.
+2. **`npx expo start`** 를 터미널 창에 입력하여 **`Expo`** 를 실행시킵니다.
 <br><br>
 
-## <img src="https://github.com/jeongwoo1998/OSS_TeamProject/assets/56586533/4dc5a449-4e10-4742-94a2-e2bda32429d1" width="25" height="25"/> 프로젝트 계획서
+### 🧑🏼‍🍳 Back-end
+* * *
 
-### 프로젝트 명
-🧑🏼‍🍳 **`영칼로리`** = `영양소 + 칼로리`
+### 🔗 Google Drive에서 음식 인식 및 양 추정 모델 다운로드
+1. Google Drive 다운로드 링크로 이동합니다.  
+   - [yolov3](https://drive.google.com/file/d/1DRJElnJSbhlmeyZ85NXpsqBcewgnrbcF/view?usp=sharing)
+   - [quantity_est](https://drive.google.com/file/d/1QKwV2J-6kdMC6_h0L9kkJ0ueRWYmVMCi/view?usp=drive_link) <br><br>
+2. 다음 파일들을 다운로드합니다.
+   - **`yolov3.zip`**
+   - **`quantity_est.zip`** <br><br>
+
+### 🚦 파일 압축 해제
+1. **`yolov3.zip`** 파일을 압축 해제합니다. <br><br>
+2. **`quantity_est.zip`** 파일을 압축 해제합니다. <br><br>
+
+### 🪄 파일 정리
+1. 압축 해제한 파일들을 **`Back-end/FoodRecognition`** 폴더에 위치시킵니다. <br><br>
+
+### 📦 필요한 패키지 설치
+1. **`Back-end/requirements.txt`** 파일을 확인합니다. <br><br>
+2. **`pip install -r requirements.txt`** <br><br>
+
+### 🚀 실행
+1. **`app.py`** 파일을 실행시킵니다. <br><br>
+
+### 🌈 _How to use API_
+_**Swagger :**_ **`localhost:5000/swagger`**
 <br><br>
 
-### 팀 구성
-|이름|담당|기타 작업|
-|---|---|---|
-|이정우|**`팀장`**,**`Front-end`**|`문서 작업`|
-|이민혁|**`Front-end`**|`서비스 구성도 기획`|
-|장정우|**`Back-end`**|`Git 버전 관리`|
-|조훈희|**`Back-end`**|`Back-end 기획 총괄`|
-<br>
+### 🧑🏼‍🍳 Android Emulator
+* * *
 
-### 개요
-다이어트나 건강 관리와 같은 이유로 식단 조절이 필요한 사람한테 도움을 줄 수 있는 **식단 관리 지원 프로그램**
+### ⚙ 설정
+1. **`Android Studio`** 를 설치합니다. <br><br>
+2. **`Android Emulator`** 를 실행시킵니다. <br><br>
+3. **`Android Emulator`** 의 **`Location`** 을 현재 위치로 바꿔줍니다. <br><br>
+4. **`Image`** 폴더 안의 사진들을 **`Android Emulator`** 에 넣어줍니다.<br><br>
+
+### 🚀 실행
+1. **`Expo`** 를 실행시킨 **`Front-end`** 터미널로 돌아옵니다. <br><br>
+2. **`Front-end`** 터미널에서 **`a`** 키를 눌러 **`Android Emulator`** 를 통해 어플을 실행합니다.
 <br><br>
 
-### 주요 기능
-1. 사용자가 업로드한 음식 사진을 분석하여 사진에 있는 음식의 영양 성분, 칼로리 등의 정보 제공
-2. 하루 영양소/칼로리 목표 섭취량 설정 및 분석한 음식 정보를 바탕으로 달성 여부 확인
-3. 사용자의 식단에서 부족한 영양소/칼로리를 기반으로 음식 또는 근처 식당 추천
-4. 소셜 로그인 연동 지원 **`(Google / Kakao / Naver)`**
+### 🔑 필수 설정
+* * *
+
+1. **`Notion`** 에 정리되어 있는  **`API KEY`** 참고하여 파일에 넣습니다.
 <br><br>
 
-### 활용 언어 / API
-1. Front-end : **`React Native`** 를 활용하여 서비스를 앱으로 구현, 가능하다면 React를 활용하여 웹으로도 구현할 예정.
-2. Back-end : **`Python`**, **`Flask`** 를 활용하여 서버 구현
-3. Database : 회원 정보, 업로드한 음식 사진, 음식 기호 등을 저장할 예정. 특히 용량이 큰 음식 사진을 저장하기 위해 **`AWS S3`** 활용
-4. AI 활용 : 음식 사진을 분석하여 이미지에 해당하는 음식을 구별할 수 있는 기능을 구현할 때 활용 예정
-5. Open API 활용 : **`Database`** 에 저장해 둔 부족한 영양 정보, 사용자의 음식 기호를 활용해 데이터 전처리 과정 진행
-**→** 전처리 과정을 마친 데이터 + 지도 API를 활용한 정보를 **`ChatGPT`** 에 전달하여 식당 추천 서비스를 구현할 때 활용 예정
-<br><br>
+### ⚠ 주의 사항
+* * *
 
-### 구체적인 세부 기능 계획 및 담당
-- 음식 사진 분석 및 음식 정보 제공 기능 **-** **`장정우`**
-    - AI를 활용한 음식 사진 인식 (Back-end)
-    - 음식 사진 업로드 & 저장 기능 구현 (DB)
-    - 음식에 맞는 칼로리/영양소 정보 받아오기 (Back-end)<br><br>
-- 목표 영양소/칼로리 설정 및 달성 여부 확인 **-** **`조훈희`**
-    - 사용자의 하루 목표 칼로리 / 영양소 정보 설정 및 저장 (Back-end)
-    - API에서 받아온 영양 정보 연동 (Back-end)<br><br>
-- 사용자 맞춤 음식(식당) 추천 **-** **`장정우`** & **`조훈희`**
-    - 사용자의 음식 기호 저장 (DB)
-    - 지도 API를 활용하여 식당 정보 받아오기 (Back-end)
-    - 음식 기호 정보와 식당 정보를 바탕으로 ChatGPT를 활용한 식당 추천 (Back-end)<br><br>
-- 사용자 정보(음식 사진, 목표치 달성) 저장 및 확인 **-** **`이정우`** & **`이민혁`**
-    - 이전에 업로드한 음식 정보 저장 (DB)
-    - 달력 API를 활용하여 날짜에 맞는 음식 사진 연동 (Front-end)
-    - 특정 날짜 클릭 시 날짜에 맞는 음식 사진 & 정보 출력 (Front-end)<br><br>
-- 소셜 로그인 연동 (Google / Kakao / Naver) **-** **`이정우`** & **`이민혁`**
-    - 회원 가입 및 로그인 기능 (Front-end)
-    - 소셜 로그인 연동 (Front-end)<br><br>
-- 앱 메인 테마 / 메뉴 디자인 구성 **-** **`이정우`** & **`이민혁`**
-    - 앱 메인 테마 디자인 구성 (Front-end)
-    - 세부 메뉴 (음식 정보 저장 및 분석 / 식당 추천 / 목표 영양소, 칼로리 설정 / 캘린더) 화면 구성 (Front-end)<br><br>
-
-### 서비스 구성도
-<img src="https://github.com/jeongwoo1998/OSS_TeamProject/assets/56586533/bf4159b1-a9a4-4b7c-8fb3-396678e7a296" width="800" height="600"/>
-<br><br>
-
-### 기대 효과
-- 식단 관리가 필요한 사람에게 자동으로 음식에 대한 정보(영양소, 칼로리)를 제공 및 취합하여 사용자의 식단 관리 지원
-- 본인의 하루 목표 칼로리 달성 현황이 한 눈에 보이므로 체중 관리에 동기부여
-- 메뉴 선정 및 식당 선택에 대한 고민 감소<br><br>
-
-*“식습관을 기록하는 앱 사용자를 대상으로 한 연구 결과 대상자의 약 77.9%에서 성공적인 체중 감량 효과를 확인했으며 **이 중 23%는 본인 체중의 10% 이상 감량** 에 성공한 것으로 나타났다.”*
-
-**[출처] 의학신문**
+**`Google Login`**
+1. **`ngrok`** 설치 후 터미널에서 실행합니다. <br><br>
+2. **`ngrok http 5000`** 입력 후 나온 주소를 확인합니다.<br><br>
+3. **`Google Cloud Console`** 에 접속합니다. <br><br> 
+4. **`Google Client ID` `Google Client Secret` `Google Redirect URI`** 를 설정합니다. <br><br>
+5. **`Back-end/Login/login.py` `Front-end/screens/GoogleLogin.js`** 의 코드를 알맞게 수정합니다. <br><br>
