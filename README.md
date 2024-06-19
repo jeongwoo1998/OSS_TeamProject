@@ -88,6 +88,19 @@ _4. 사용자의 식단에서 부족한 **영양 성분**을 기반으로 **음�
 
 ## 💡 실행 방법
 
+💻 **필요한 툴**
+- **`Visual Studio Code`**
+- **`Android Studio`**
+
+
+🐍 **Python 3.11 버전 이상 사용을 권장합니다.**
+
+```bash
+
+❗ 📁 Front-end, 📁 Back-end 폴더를 VS Code 를 통해 따로 실행시킵니다.
+
+```
+
 ### 📁 폴더 구조
 
 ```bash
@@ -108,12 +121,15 @@ _4. 사용자의 식단에서 부족한 **영양 성분**을 기반으로 **음�
 * * *
 
 ### 🚀 실행
-1. **`node.js`** 를 설치합니다.
-2. **`npx expo start`** 를 터미널 창에 입력하여 **`Expo`** 를 실행시킵니다.
+1. **`node.js`** 를 설치합니다. <br><br>
+2. **`VS Code`** 를 통해 **`Front-end`** 폴더를 실행합니다. <br><br>
+3. **`npx expo start`** 를 터미널 창에 입력하여 **`Expo`** 를 실행시킵니다.
 <br><br>
 
 ### 🧑🏼‍🍳 Back-end
 * * *
+
+**`VS Code`** 를 통해 **`Back-end`** 폴더를 실행합니다.
 
 ### 🔗 Google Drive에서 음식 인식 및 양 추정 모델 다운로드
 1. Google Drive 다운로드 링크로 이동합니다.  
@@ -135,7 +151,18 @@ _4. 사용자의 식단에서 부족한 **영양 성분**을 기반으로 **음�
 2. **`pip install -r requirements.txt`** <br><br>
 
 ### 🚀 실행
+❗ _실행 전 [🔑 필수 설정](#-필수-설정)을 확인합니다._
 1. **`app.py`** 파일을 실행시킵니다. <br><br>
+
+### ⚠ 오류 발생 시
+**`quantity_est` `yolov3` 인식이 안될 경우** _(원인 ➡ 파일 압축 해제 과정에서 파일 중복)_
+
+- _**`Back-end/FoodRecognition/foodRecognition.py` 코드 아래와 같이 수정**_
+
+```python
+from quantity_est.quantity_est.food_quantity_model import quantity
+from yolov3.yolov3.food_recognition_model import detect, get_nutrients
+```
 
 ### 🌈 _How to use API_
 _**Swagger :**_ **`localhost:5000/swagger`**
@@ -146,9 +173,25 @@ _**Swagger :**_ **`localhost:5000/swagger`**
 
 ### ⚙ 설정
 1. **`Android Studio`** 를 설치합니다. <br><br>
-2. **`Android Emulator`** 를 실행시킵니다. <br><br>
-3. **`Android Emulator`** 의 **`Location`** 을 현재 위치로 바꿔줍니다. <br><br>
-4. **`Image`** 폴더 안의 사진들을 **`Android Emulator`** 에 넣어줍니다.<br><br>
+2. **`Android Studio`** 프로젝트를 **`No Activity`** 로 생성합니다. <br><br>
+3. **`Device Manager`** 창의 **`+`** 버튼을 눌러 **`Create Virtual Device`** 를 선택합니다. <br><br>
+4. **`Pixel 8`** 을 선택하여 **`Android Emulator`** 생성을 완료합니다. <br><br>
+5. **`Android Emulator`** 를 실행시킵니다. <br><br>
+6. **`Android Emulator`** 의 **`Location`** 을 현재 위치로 바꿔줍니다.
+- **`Android Emulator`** 실행 후 **`...`** 버튼을 누릅니다.
+- **`Location`** 을 눌러 현재 위치로 설정 후 **`Set Location`** 을 누릅니다.<br><br>
+7. 프로젝트 **`Image`** 폴더 안의 사진들을 **`Android Emulator`** 에 넣어줍니다.
+
+ - **`Drag & Drop`**
+   - _**`Image`** 폴더 안의 사진들을 **`Android Emulator`** 화면에 직접 끌어다 넣습니다._ <br><br>
+
+- _**직접 설정**_
+
+   - _**`Android Studio`** 에서 "View" > "Tool Windows" > "Device Explorer"를 선택합니다._
+   - _**`Device Explorer`** 창에서 에뮬레이터의 파일 시스템을 탐색합니다._
+   - _**/sdcard** 또는 **/storage/emulated/0** 디렉토리를 찾아서 선택합니다._
+   - _**`Pictures`** 폴더를 선택하여 **`Image`** 폴더 안의 사진을 넣습니다._
+
 
 ### 🚀 실행
 1. **`Expo`** 를 실행시킨 **`Front-end`** 터미널로 돌아옵니다. <br><br>
