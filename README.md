@@ -202,7 +202,7 @@ _**Swagger :**_ **`localhost:5000/swagger`**
 ### 🔑 필수 설정
 * * *
 
-1. **`Notion`** 에 정리되어 있는  **`API KEY`** 참고하여 파일에 넣습니다.
+1. [📄 프로젝트 문서화](#-프로젝트-문서화) **`Notion`** 에 정리되어 있는  **`API KEY`** 참고하여 파일에 넣습니다.
 <br><br>
 
 ### ⚠ 주의 사항
@@ -225,7 +225,7 @@ _**Swagger :**_ **`localhost:5000/swagger`**
 - [**프로젝트 계획서**](https://marsh-holiday-5f0.notion.site/23a1c8e5c66b45c0bd944a1f71df7c31?pvs=4)
 - [**프로젝트 진행 현황**](https://marsh-holiday-5f0.notion.site/03bb32256711439fa02793dcdd6b0eca?pvs=4)
 - [**프로젝트 결과 보고서**](https://marsh-holiday-5f0.notion.site/443115f874134519a6cc42c62d0f4b2f?pvs=4)
-- **API KEY** _(팀스페이스 멤버만 확인 가능)_
+- [**API KEY**](https://marsh-holiday-5f0.notion.site/API-KEY-fe1f79dd807149009c74081338356f29?pvs=4)
 <br><br>
 
 3. **`SWAGGER`**
